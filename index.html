@@ -1,0 +1,3421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Olvex Financial Bank - Premier Private Banking for Ultra High Net Worth Individuals">
+<meta name="robots" content="noindex,nofollow">
+<title>Olvex Financial Bank | Premier Private Banking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --gold: #c9a84c;
+  --gold-light: #e8c96a;
+  --gold-dark: #a07830;
+  --navy: #0a0f1e;
+  --navy-2: #0d1529;
+  --navy-3: #111d35;
+  --navy-4: #162040;
+  --navy-5: #1a2850;
+  --blue-accent: #1e4db7;
+  --blue-bright: #2563eb;
+  --teal: #0d9488;
+  --red: #ef4444;
+  --green: #10b981;
+  --amber: #f59e0b;
+  --purple: #8b5cf6;
+  --white: #ffffff;
+  --off-white: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-300: #cbd5e1;
+  --gray-400: #94a3b8;
+  --gray-500: #64748b;
+  --gray-600: #475569;
+  --gray-700: #334155;
+  --glass: rgba(255,255,255,0.05);
+  --glass-border: rgba(201,168,76,0.2);
+  --shadow-gold: 0 0 30px rgba(201,168,76,0.15);
+  --shadow-blue: 0 0 30px rgba(37,99,235,0.2);
+  --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+  --radius: 16px;
+  --radius-sm: 8px;
+  --sidebar-width: 280px;
+  --header-height: 70px;
+}
+[data-theme="light"] {
+  --navy: #f0f4ff;
+  --navy-2: #e8eeff;
+  --navy-3: #dde5ff;
+  --navy-4: #c8d4f8;
+  --navy-5: #b8c4f0;
+  --glass: rgba(0,0,0,0.03);
+  --glass-border: rgba(30,77,183,0.2);
+  --white: #0a0f1e;
+  --off-white: #1a2850;
+  --gray-100: #1e2d5a;
+  --gray-200: #2a3d70;
+  --gray-300: #3a5090;
+  --gray-400: #4a64b0;
+  --gray-500: #6a84d0;
+  --gray-600: #8aa4e0;
+  --gray-700: #aac4f0;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--navy);color:var(--white);min-height:100vh;overflow-x:hidden;}
+::selection{background:var(--gold);color:var(--navy);}
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--navy-2);}
+::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:3px;}
+
+/* ANIMATIONS */
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes slideRight{from{opacity:0;transform:translateX(-30px);}to{opacity:1;transform:translateX(0);}}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.5;}}
+@keyframes shimmer{0%{background-position:-200% 0;}100%{background-position:200% 0;}}
+@keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}  }
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(201,168,76,0.3);}50%{box-shadow:0 0 40px rgba(201,168,76,0.6),0 0 80px rgba(201,168,76,0.2);}}
+@keyframes countUp{from{opacity:0;transform:scale(0.8);}to{opacity:1;transform:scale(1);}}
+@keyframes ripple{0%{transform:scale(0);opacity:1;}100%{transform:scale(4);opacity:0;}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px);}to{opacity:1;transform:translateY(0);}}
+@keyframes progressFill{from{width:0;}to{width:var(--target-width);}}
+
+/* UTILITIES */
+.hidden{display:none!important;}
+.fade-in{animation:fadeIn 0.6s ease forwards;}
+.text-gold{color:var(--gold);}
+.text-green{color:var(--green);}
+.text-red{color:var(--red);}
+.text-blue{color:var(--blue-bright);}
+.glass{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--glass-border);}
+
+/* ============================================
+   LOGIN PAGE
+   ============================================ */
+#loginPage {
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: radial-gradient(ellipse at 20% 50%, rgba(30,77,183,0.15) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 20%, rgba(201,168,76,0.1) 0%, transparent 50%),
+              radial-gradient(ellipse at 60% 80%, rgba(13,148,136,0.08) 0%, transparent 50%),
+              var(--navy);
+  position:relative;
+  overflow:hidden;
+}
+#loginPage::before {
+  content:'';
+  position:absolute;
+  width:600px;height:600px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+  top:-100px;right:-100px;
+  animation:float 8s ease-in-out infinite;
+}
+#loginPage::after {
+  content:'';
+  position:absolute;
+  width:400px;height:400px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(30,77,183,0.08) 0%, transparent 70%);
+  bottom:-80px;left:-80px;
+  animation:float 10s ease-in-out infinite reverse;
+}
+.login-container {
+  width:100%;max-width:460px;
+  padding:20px;
+  position:relative;z-index:1;
+  animation:fadeIn 0.8s ease;
+}
+.login-logo {
+  text-align:center;
+  margin-bottom:40px;
+}
+.login-logo .logo-icon {
+  width:72px;height:72px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+  border-radius:18px;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 16px;
+  font-size:32px;
+  box-shadow:var(--shadow-gold);
+  animation:glow 3s ease-in-out infinite;
+}
+.login-logo h1 {
+  font-family:'Playfair Display',serif;
+  font-size:28px;font-weight:700;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  letter-spacing:1px;
+}
+.login-logo p {
+  color:var(--gray-400);
+  font-size:13px;letter-spacing:3px;
+  text-transform:uppercase;margin-top:4px;
+}
+.login-card {
+  background:linear-gradient(135deg,rgba(255,255,255,0.07) 0%,rgba(255,255,255,0.03) 100%);
+  border:1px solid rgba(201,168,76,0.25);
+  border-radius:24px;
+  padding:40px;
+  backdrop-filter:blur(20px);
+  box-shadow:0 25px 60px rgba(0,0,0,0.4),var(--shadow-gold);
+}
+.login-card h2{font-size:22px;font-weight:700;margin-bottom:6px;}
+.login-card p.subtitle{color:var(--gray-400);font-size:14px;margin-bottom:30px;}
+.form-group{margin-bottom:20px;position:relative;}
+.form-group label {
+  display:block;font-size:12px;font-weight:600;
+  color:var(--gray-400);letter-spacing:1px;
+  text-transform:uppercase;margin-bottom:8px;
+}
+.form-group input {
+  width:100%;
+  padding:14px 18px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:12px;
+  color:var(--white);
+  font-size:15px;
+  font-family:'Inter',sans-serif;
+  transition:var(--transition);
+  outline:none;
+}
+.form-group input:focus {
+  border-color:var(--gold);
+  background:rgba(201,168,76,0.05);
+  box-shadow:0 0 0 3px rgba(201,168,76,0.1);
+}
+.form-group input::placeholder{color:var(--gray-500);}
+.input-wrapper{position:relative;}
+.input-wrapper input{padding-right:50px;}
+.eye-btn {
+  position:absolute;right:14px;top:50%;transform:translateY(-50%);
+  background:none;border:none;cursor:pointer;
+  color:var(--gray-400);font-size:18px;
+  transition:var(--transition);padding:4px;
+}
+.eye-btn:hover{color:var(--gold);}
+.form-options {
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:24px;
+}
+.checkbox-group{display:flex;align-items:center;gap:8px;cursor:pointer;}
+.checkbox-group input[type=checkbox]{
+  width:16px;height:16px;accent-color:var(--gold);cursor:pointer;
+}
+.checkbox-group span{font-size:13px;color:var(--gray-400);}
+.forgot-link {
+  font-size:13px;color:var(--gold);
+  text-decoration:none;cursor:pointer;
+  transition:var(--transition);background:none;border:none;
+}
+.forgot-link:hover{color:var(--gold-light);text-decoration:underline;}
+.btn-login {
+  width:100%;padding:16px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+  border:none;border-radius:12px;
+  color:var(--navy);
+  font-size:16px;font-weight:700;
+  font-family:'Inter',sans-serif;
+  cursor:pointer;letter-spacing:0.5px;
+  transition:var(--transition);
+  position:relative;overflow:hidden;
+}
+.btn-login:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 30px rgba(201,168,76,0.4);
+}
+.btn-login:active{transform:translateY(0);}
+.btn-login .ripple-effect {
+  position:absolute;border-radius:50%;
+  background:rgba(255,255,255,0.3);
+  animation:ripple 0.6s linear;
+  pointer-events:none;
+}
+.login-divider {
+  text-align:center;margin:20px 0;
+  position:relative;color:var(--gray-500);font-size:12px;
+}
+.login-divider::before,.login-divider::after {
+  content:'';position:absolute;top:50%;width:40%;
+  height:1px;background:rgba(255,255,255,0.1);
+}
+.login-divider::before{left:0;}
+.login-divider::after{right:0;}
+.biometric-btn {
+  width:100%;padding:14px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:12px;
+  color:var(--gray-300);
+  font-size:14px;font-weight:500;
+  font-family:'Inter',sans-serif;
+  cursor:pointer;
+  transition:var(--transition);
+  display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.biometric-btn:hover{
+  border-color:var(--gold);
+  color:var(--gold);
+  background:rgba(201,168,76,0.05);
+}
+.login-footer-note {
+  text-align:center;margin-top:24px;
+  font-size:11px;color:var(--gray-500);line-height:1.6;
+}
+.security-badges {
+  display:flex;align-items:center;justify-content:center;
+  gap:16px;margin-top:16px;
+}
+.security-badge {
+  display:flex;align-items:center;gap:5px;
+  font-size:11px;color:var(--gray-500);
+}
+.security-badge span.dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--green);display:inline-block;
+  animation:pulse 2s ease-in-out infinite;
+}
+.login-error {
+  background:rgba(239,68,68,0.1);
+  border:1px solid rgba(239,68,68,0.3);
+  border-radius:8px;padding:12px 16px;
+  color:#fca5a5;font-size:13px;
+  margin-bottom:16px;display:none;
+}
+
+/* ============================================
+   LOADING SCREEN
+   ============================================ */
+#loadingScreen {
+  position:fixed;inset:0;
+  background:var(--navy);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  z-index:9999;
+  transition:opacity 0.5s ease;
+}
+.loading-logo{
+  font-family:'Playfair Display',serif;
+  font-size:36px;font-weight:700;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin-bottom:40px;
+}
+.loading-bar-track{
+  width:300px;height:3px;
+  background:rgba(255,255,255,0.1);
+  border-radius:2px;overflow:hidden;
+}
+.loading-bar-fill{
+  height:100%;width:0;
+  background:linear-gradient(90deg,var(--gold-dark),var(--gold-light));
+  border-radius:2px;
+  transition:width 0.3s ease;
+}
+.loading-text{
+  margin-top:16px;font-size:13px;
+  color:var(--gray-400);letter-spacing:2px;text-transform:uppercase;
+}
+
+/* ============================================
+   DASHBOARD LAYOUT
+   ============================================ */
+#dashboard{display:none;min-height:100vh;}
+.dash-layout{display:flex;min-height:100vh;}
+
+/* SIDEBAR */
+.sidebar {
+  width:var(--sidebar-width);
+  background:linear-gradient(180deg,var(--navy-2) 0%,var(--navy-3) 100%);
+  border-right:1px solid rgba(201,168,76,0.15);
+  display:flex;flex-direction:column;
+  position:fixed;left:0;top:0;bottom:0;
+  z-index:100;
+  transition:transform 0.3s ease;
+  overflow-y:auto;
+}
+.sidebar-logo {
+  padding:24px 20px;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  display:flex;align-items:center;gap:12px;
+}
+.sidebar-logo .logo-mark {
+  width:40px;height:40px;min-width:40px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;
+}
+.sidebar-logo .logo-text {
+  font-family:'Playfair Display',serif;
+  font-size:15px;font-weight:700;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  line-height:1.2;
+}
+.sidebar-logo .logo-text span {
+  display:block;font-size:10px;letter-spacing:2px;
+  color:var(--gray-500);-webkit-text-fill-color:var(--gray-500);
+  font-family:'Inter',sans-serif;font-weight:500;text-transform:uppercase;
+}
+.sidebar-user {
+  padding:16px 20px;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  display:flex;align-items:center;gap:12px;
+}
+.user-avatar {
+  width:44px;height:44px;min-width:44px;
+  background:linear-gradient(135deg,var(--gold),var(--blue-accent));
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;font-weight:700;color:white;
+  border:2px solid rgba(201,168,76,0.5);
+}
+.user-info .user-name{font-size:13px;font-weight:600;}
+.user-info .user-tier {
+  font-size:10px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--gold);font-weight:600;
+}
+.sidebar-nav{padding:12px 0;flex:1;}
+.nav-section-title {
+  padding:10px 20px 6px;
+  font-size:10px;letter-spacing:2px;
+  color:var(--gray-500);text-transform:uppercase;font-weight:600;
+}
+.nav-item {
+  display:flex;align-items:center;gap:12px;
+  padding:11px 20px;
+  cursor:pointer;
+  transition:var(--transition);
+  position:relative;
+  font-size:13.5px;font-weight:500;
+  color:var(--gray-400);
+  border-radius:0;
+  text-decoration:none;
+  border:none;background:none;width:100%;text-align:left;
+}
+.nav-item:hover{
+  color:var(--white);
+  background:rgba(255,255,255,0.04);
+}
+.nav-item.active {
+  color:var(--gold);
+  background:linear-gradient(90deg,rgba(201,168,76,0.1) 0%,transparent 100%);
+}
+.nav-item.active::before {
+  content:'';
+  position:absolute;left:0;top:0;bottom:0;
+  width:3px;
+  background:linear-gradient(180deg,var(--gold-light),var(--gold));
+  border-radius:0 2px 2px 0;
+}
+.nav-item .nav-icon{font-size:16px;width:20px;text-align:center;}
+.nav-item .nav-badge {
+  margin-left:auto;
+  background:var(--red);
+  color:white;
+  font-size:10px;font-weight:700;
+  padding:2px 7px;border-radius:10px;
+}
+.sidebar-bottom {
+  padding:16px 20px;
+  border-top:1px solid rgba(255,255,255,0.06);
+}
+.logout-btn {
+  width:100%;padding:11px 16px;
+  background:rgba(239,68,68,0.08);
+  border:1px solid rgba(239,68,68,0.2);
+  border-radius:10px;
+  color:#fca5a5;
+  font-size:13px;font-weight:600;
+  font-family:'Inter',sans-serif;
+  cursor:pointer;
+  transition:var(--transition);
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.logout-btn:hover{background:rgba(239,68,68,0.15);border-color:rgba(239,68,68,0.4);}
+
+/* MAIN CONTENT */
+.main-content {
+  margin-left:var(--sidebar-width);
+  flex:1;min-height:100vh;
+  display:flex;flex-direction:column;
+}
+.topbar {
+  height:var(--header-height);
+  background:rgba(13,21,41,0.95);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;
+  padding:0 28px;gap:20px;
+}
+.topbar-title {
+  font-size:20px;font-weight:700;flex:1;
+}
+.topbar-actions{display:flex;align-items:center;gap:12px;}
+.topbar-btn {
+  width:40px;height:40px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.08);
+  background:rgba(255,255,255,0.04);
+  color:var(--gray-300);
+  cursor:pointer;font-size:16px;
+  transition:var(--transition);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.topbar-btn:hover{border-color:var(--gold);color:var(--gold);}
+.topbar-btn .badge {
+  position:absolute;top:-4px;right:-4px;
+  width:16px;height:16px;
+  background:var(--red);border-radius:50%;
+  font-size:9px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  color:white;
+}
+.menu-toggle {
+  display:none;
+  width:40px;height:40px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.08);
+  background:rgba(255,255,255,0.04);
+  color:var(--white);
+  cursor:pointer;font-size:18px;
+  align-items:center;justify-content:center;
+}
+.page-content{
+  padding:28px;
+  flex:1;
+  animation:fadeIn 0.5s ease;
+}
+
+/* ============================================
+   CARDS & COMPONENTS
+   ============================================ */
+.section-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:20px;
+}
+.section-title{
+  font-size:18px;font-weight:700;
+}
+.section-subtitle{
+  font-size:13px;color:var(--gray-400);margin-top:2px;
+}
+.btn-sm {
+  padding:8px 16px;border-radius:8px;
+  font-size:12px;font-weight:600;
+  cursor:pointer;transition:var(--transition);
+  font-family:'Inter',sans-serif;
+  display:inline-flex;align-items:center;gap:6px;
+  border:none;
+}
+.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--navy);}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(201,168,76,0.3);}
+.btn-secondary{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1)!important;color:var(--white);}
+.btn-secondary:hover{border-color:var(--gold)!important;color:var(--gold);}
+.btn-danger{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3)!important;color:#fca5a5;}
+.btn-danger:hover{background:rgba(239,68,68,0.2);}
+.btn-blue{background:linear-gradient(135deg,var(--blue-bright),var(--blue-accent));color:white;}
+.btn-blue:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(37,99,235,0.3);}
+
+.card {
+  background:linear-gradient(135deg,rgba(255,255,255,0.06) 0%,rgba(255,255,255,0.02) 100%);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:var(--radius);
+  padding:24px;
+  transition:var(--transition);
+}
+.card:hover{border-color:rgba(201,168,76,0.2);}
+.card-gold {
+  background:linear-gradient(135deg,rgba(201,168,76,0.12) 0%,rgba(160,120,48,0.06) 100%);
+  border-color:rgba(201,168,76,0.3);
+}
+.card-blue {
+  background:linear-gradient(135deg,rgba(37,99,235,0.12) 0%,rgba(30,77,183,0.06) 100%);
+  border-color:rgba(37,99,235,0.3);
+}
+.card-green {
+  background:linear-gradient(135deg,rgba(16,185,129,0.12) 0%,rgba(13,148,136,0.06) 100%);
+  border-color:rgba(16,185,129,0.3);
+}
+.card-purple {
+  background:linear-gradient(135deg,rgba(139,92,246,0.12) 0%,rgba(109,62,216,0.06) 100%);
+  border-color:rgba(139,92,246,0.3);
+}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.grid-auto{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;}
+
+/* Balance Cards */
+.balance-card{
+  border-radius:var(--radius);
+  padding:24px;
+  position:relative;overflow:hidden;
+  cursor:pointer;transition:var(--transition);
+}
+.balance-card::after{
+  content:'';
+  position:absolute;
+  width:150px;height:150px;border-radius:50%;
+  background:rgba(255,255,255,0.04);
+  top:-30px;right:-30px;
+}
+.balance-card:hover{transform:translateY(-3px);}
+.balance-card .card-label{
+  font-size:11px;letter-spacing:2px;
+  text-transform:uppercase;font-weight:600;
+  opacity:0.8;
+}
+.balance-card .card-amount{
+  font-size:28px;font-weight:800;
+  margin:10px 0 4px;
+  font-feature-settings:'tnum';
+}
+.balance-card .card-change{
+  font-size:12px;opacity:0.7;
+  display:flex;align-items:center;gap:4px;
+}
+.balance-card .card-icon{
+  position:absolute;right:20px;top:20px;
+  font-size:28px;opacity:0.4;
+}
+.balance-card-1{background:linear-gradient(135deg,#1e4db7,#0a1e5e);}
+.balance-card-2{background:linear-gradient(135deg,#a07830,#5a3f10);}
+.balance-card-3{background:linear-gradient(135deg,#0d7a6e,#053d38);}
+.balance-card-4{background:linear-gradient(135deg,#6d28d9,#3b1271);}
+
+/* Transactions */
+.transactions-list{display:flex;flex-direction:column;gap:1px;}
+.tx-item {
+  display:flex;align-items:center;gap:16px;
+  padding:14px 16px;
+  border-radius:10px;
+  transition:var(--transition);
+  cursor:pointer;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.tx-item:hover{background:rgba(255,255,255,0.04);}
+.tx-icon {
+  width:42px;height:42px;min-width:42px;
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;
+}
+.tx-icon.deposit{background:rgba(16,185,129,0.15);color:var(--green);}
+.tx-icon.transfer{background:rgba(37,99,235,0.15);color:var(--blue-bright);}
+.tx-icon.payment{background:rgba(239,68,68,0.15);color:var(--red);}
+.tx-icon.credit{background:rgba(139,92,246,0.15);color:var(--purple);}
+.tx-icon.reward{background:rgba(201,168,76,0.15);color:var(--gold);}
+.tx-info{flex:1;}
+.tx-name{font-size:13.5px;font-weight:600;}
+.tx-date{font-size:11px;color:var(--gray-500);margin-top:2px;}
+.tx-amount{font-size:14px;font-weight:700;}
+.tx-amount.pos{color:var(--green);}
+.tx-amount.neg{color:var(--red);}
+.tx-status{
+  font-size:10px;font-weight:600;
+  padding:3px 8px;border-radius:6px;
+  letter-spacing:0.5px;
+}
+.tx-status.completed{background:rgba(16,185,129,0.15);color:var(--green);}
+.tx-status.pending{background:rgba(245,158,11,0.15);color:var(--amber);}
+.tx-status.failed{background:rgba(239,68,68,0.15);color:var(--red);}
+
+/* Stat Row */
+.stat-row{display:flex;gap:20px;flex-wrap:wrap;}
+.stat-item{flex:1;min-width:100px;text-align:center;}
+.stat-value{font-size:22px;font-weight:800;color:var(--gold);}
+.stat-label{font-size:11px;color:var(--gray-500);margin-top:4px;letter-spacing:1px;text-transform:uppercase;}
+
+/* Progress Bar */
+.progress-bar-track{
+  height:8px;border-radius:4px;
+  background:rgba(255,255,255,0.08);
+  overflow:hidden;margin-top:8px;
+}
+.progress-bar-fill{
+  height:100%;border-radius:4px;
+  transition:width 1s ease;
+  background:linear-gradient(90deg,var(--gold-dark),var(--gold-light));
+}
+
+/* Chart containers */
+.chart-container{position:relative;width:100%;}
+canvas{max-width:100%;}
+
+/* Credit Score */
+.credit-score-ring{
+  width:160px;height:160px;
+  border-radius:50%;
+  background:conic-gradient(var(--gold) 0% 85%, rgba(255,255,255,0.1) 85% 100%);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;margin:0 auto;
+}
+.credit-score-ring::before{
+  content:'';
+  position:absolute;inset:12px;
+  border-radius:50%;
+  background:var(--navy-3);
+}
+.credit-score-inner{
+  position:relative;z-index:1;
+  text-align:center;
+}
+.credit-score-num{
+  font-size:36px;font-weight:900;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.credit-score-label{font-size:10px;color:var(--gray-400);letter-spacing:1px;}
+
+/* Quick Actions */
+.quick-actions{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(90px,1fr));
+  gap:12px;
+}
+.quick-action-btn {
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  padding:16px 10px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:14px;
+  cursor:pointer;transition:var(--transition);
+  font-family:'Inter',sans-serif;
+  color:var(--gray-300);
+}
+.quick-action-btn:hover{
+  border-color:var(--gold);
+  color:var(--gold);
+  background:rgba(201,168,76,0.06);
+  transform:translateY(-2px);
+}
+.quick-action-btn .qa-icon{
+  font-size:22px;
+  transition:var(--transition);
+}
+.quick-action-btn span{
+  font-size:11px;font-weight:600;
+  text-align:center;line-height:1.2;
+}
+
+/* Notification Badge */
+.notif-dot {
+  width:8px;height:8px;border-radius:50%;
+  background:var(--red);
+  display:inline-block;margin-left:6px;
+  animation:pulse 2s infinite;
+}
+
+/* Alert banners */
+.alert-banner {
+  border-radius:12px;padding:14px 18px;
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:16px;font-size:13px;
+}
+.alert-banner.info{background:rgba(37,99,235,0.1);border:1px solid rgba(37,99,235,0.25);color:#93c5fd;}
+.alert-banner.success{background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.25);color:#6ee7b7;}
+.alert-banner.warning{background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.25);color:#fcd34d;}
+.alert-banner.danger{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);color:#fca5a5;}
+
+/* Tags */
+.tag {
+  display:inline-flex;align-items:center;gap:4px;
+  padding:4px 10px;border-radius:20px;
+  font-size:11px;font-weight:600;letter-spacing:0.5px;
+}
+.tag-gold{background:rgba(201,168,76,0.15);color:var(--gold);}
+.tag-green{background:rgba(16,185,129,0.15);color:var(--green);}
+.tag-blue{background:rgba(37,99,235,0.15);color:#93c5fd;}
+.tag-red{background:rgba(239,68,68,0.15);color:#fca5a5;}
+.tag-purple{background:rgba(139,92,246,0.15);color:#c4b5fd;}
+
+/* ============================================
+   MODALS
+   ============================================ */
+.modal-overlay {
+  position:fixed;inset:0;
+  background:rgba(0,0,0,0.7);
+  backdrop-filter:blur(6px);
+  z-index:1000;
+  display:none;
+  align-items:center;justify-content:center;
+  padding:20px;
+}
+.modal-overlay.active{display:flex;animation:fadeIn 0.3s ease;}
+.modal {
+  background:linear-gradient(135deg,var(--navy-3),var(--navy-4));
+  border:1px solid rgba(201,168,76,0.2);
+  border-radius:20px;
+  padding:32px;
+  width:100%;max-width:500px;
+  max-height:85vh;overflow-y:auto;
+  animation:fadeIn 0.3s ease;
+  box-shadow:0 30px 80px rgba(0,0,0,0.5);
+}
+.modal-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:24px;
+}
+.modal-title{font-size:20px;font-weight:700;}
+.modal-close {
+  width:36px;height:36px;border-radius:8px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.1);
+  color:var(--gray-300);cursor:pointer;font-size:18px;
+  display:flex;align-items:center;justify-content:center;
+  transition:var(--transition);
+}
+.modal-close:hover{background:rgba(239,68,68,0.15);border-color:rgba(239,68,68,0.3);color:#fca5a5;}
+.modal-field{margin-bottom:18px;}
+.modal-field label{display:block;font-size:12px;font-weight:600;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
+.modal-field input,.modal-field select,.modal-field textarea {
+  width:100%;padding:12px 16px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:10px;color:var(--white);
+  font-size:14px;font-family:'Inter',sans-serif;
+  transition:var(--transition);outline:none;
+}
+.modal-field input:focus,.modal-field select:focus,.modal-field textarea:focus{
+  border-color:var(--gold);background:rgba(201,168,76,0.04);
+}
+.modal-field select option{background:var(--navy-3);color:var(--white);}
+.modal-field textarea{resize:vertical;min-height:80px;}
+.modal-actions{display:flex;gap:12px;justify-content:flex-end;margin-top:24px;}
+.modal-divider{height:1px;background:rgba(255,255,255,0.06);margin:20px 0;}
+.success-animation{
+  text-align:center;padding:20px;
+}
+.success-icon{
+  width:72px;height:72px;
+  background:rgba(16,185,129,0.15);
+  border:2px solid var(--green);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:32px;margin:0 auto 16px;
+  animation:countUp 0.5s ease;
+}
+
+/* ============================================
+   TOAST NOTIFICATIONS
+   ============================================ */
+#toastContainer {
+  position:fixed;top:20px;right:20px;
+  z-index:9999;
+  display:flex;flex-direction:column;gap:10px;
+}
+.toast {
+  min-width:300px;max-width:400px;
+  padding:14px 18px;
+  border-radius:12px;
+  display:flex;align-items:center;gap:12px;
+  font-size:13px;font-weight:500;
+  backdrop-filter:blur(20px);
+  animation:slideRight 0.4s ease;
+  cursor:pointer;
+  box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+.toast.success{background:rgba(16,185,129,0.9);color:white;border:1px solid rgba(255,255,255,0.2);}
+.toast.error{background:rgba(239,68,68,0.9);color:white;border:1px solid rgba(255,255,255,0.2);}
+.toast.info{background:rgba(37,99,235,0.9);color:white;border:1px solid rgba(255,255,255,0.2);}
+.toast.warning{background:rgba(245,158,11,0.9);color:white;border:1px solid rgba(255,255,255,0.2);}
+
+/* ============================================
+   SIDEBAR OVERLAY (mobile)
+   ============================================ */
+.sidebar-overlay{
+  display:none;
+  position:fixed;inset:0;
+  background:rgba(0,0,0,0.5);
+  z-index:99;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media(max-width:1024px){
+  .grid-4{grid-template-columns:repeat(2,1fr);}
+  .grid-3{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%);}
+  .sidebar.open{transform:translateX(0);}
+  .sidebar-overlay.active{display:block;}
+  .main-content{margin-left:0;}
+  .menu-toggle{display:flex;}
+  .grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}
+  .page-content{padding:16px;}
+  .balance-card .card-amount{font-size:22px;}
+  .modal{padding:24px;}
+}
+
+/* ============================================
+   SECTION PAGES (hidden by default)
+   ============================================ */
+.dash-page{display:none;}
+.dash-page.active{display:block;animation:fadeIn 0.5s ease;}
+
+/* Investment Chart / Summary */
+.investment-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+.investment-row:last-child{border-bottom:none;}
+.inv-color{width:10px;height:10px;border-radius:50%;}
+.inv-name{flex:1;font-size:13px;font-weight:500;}
+.inv-value{font-size:13px;font-weight:700;}
+.inv-change{font-size:12px;margin-left:8px;}
+.inv-change.up{color:var(--green);}
+.inv-change.down{color:var(--red);}
+
+/* Security items */
+.security-item{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 0;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.security-item:last-child{border-bottom:none;}
+.security-item .sec-icon{
+  width:40px;height:40px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;
+}
+.sec-icon.green{background:rgba(16,185,129,0.15);color:var(--green);}
+.sec-icon.red{background:rgba(239,68,68,0.15);color:var(--red);}
+.sec-icon.amber{background:rgba(245,158,11,0.15);color:var(--amber);}
+.sec-icon.blue{background:rgba(37,99,235,0.15);color:var(--blue-bright);}
+.security-item .sec-info{flex:1;}
+.security-item .sec-title{font-size:13.5px;font-weight:600;}
+.security-item .sec-desc{font-size:12px;color:var(--gray-400);margin-top:2px;}
+.toggle-switch{
+  position:relative;display:inline-block;width:44px;height:24px;cursor:pointer;
+}
+.toggle-switch input{opacity:0;width:0;height:0;}
+.toggle-slider{
+  position:absolute;inset:0;border-radius:12px;
+  background:rgba(255,255,255,0.1);transition:var(--transition);
+}
+.toggle-slider::before{
+  content:'';position:absolute;
+  height:18px;width:18px;
+  border-radius:50%;background:white;
+  left:3px;top:3px;transition:var(--transition);
+}
+.toggle-switch input:checked + .toggle-slider{background:var(--gold);}
+.toggle-switch input:checked + .toggle-slider::before{transform:translateX(20px);}
+
+/* TABLE */
+.data-table{width:100%;border-collapse:collapse;font-size:13px;}
+.data-table th{
+  padding:10px 14px;text-align:left;
+  font-size:11px;font-weight:600;
+  color:var(--gray-500);letter-spacing:1px;text-transform:uppercase;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.data-table td{
+  padding:12px 14px;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+  vertical-align:middle;
+}
+.data-table tr:hover td{background:rgba(255,255,255,0.02);}
+.data-table tr:last-child td{border-bottom:none;}
+</style>
+</head>
+<body>
+
+<!-- LOADING SCREEN -->
+<div id="loadingScreen">
+  <div class="loading-logo">🏛 Olvex</div>
+  <div class="loading-bar-track">
+    <div class="loading-bar-fill" id="loadingBar"></div>
+  </div>
+  <div class="loading-text" id="loadingText">Initializing Secure Session...</div>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div id="toastContainer"></div>
+
+<!-- SIDEBAR OVERLAY (mobile) -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+<!-- ============================================
+     LOGIN PAGE
+     ============================================ -->
+<div id="loginPage">
+  <div class="login-container">
+    <div class="login-logo">
+      <div class="logo-icon">🏛</div>
+      <h1>Olvex Financial Bank</h1>
+      <p>Premier Private Banking</p>
+    </div>
+    <div class="login-card">
+      <h2>Secure Sign In</h2>
+      <p class="subtitle">Access your private banking dashboard</p>
+      <div class="login-error" id="loginError">⚠ Invalid credentials. Please try again.</div>
+      <div class="form-group">
+        <label>Username or Email</label>
+        <input type="text" id="loginUser" placeholder="Enter username or email" autocomplete="username">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <div class="input-wrapper">
+          <input type="password" id="loginPass" placeholder="Enter your password" autocomplete="current-password">
+          <button class="eye-btn" id="eyeBtn" onclick="togglePassword()" type="button">👁</button>
+        </div>
+      </div>
+      <div class="form-options">
+        <label class="checkbox-group">
+          <input type="checkbox" id="rememberMe">
+          <span>Remember Me</span>
+        </label>
+        <button class="forgot-link" onclick="openModal('forgotModal')">Forgot Password?</button>
+      </div>
+      <button class="btn-login" id="loginBtn" onclick="handleLogin()">
+        🔐 Sign In Securely
+      </button>
+      <div class="login-divider">or continue with</div>
+      <button class="biometric-btn" onclick="handleBiometric()">
+        <span>🪪</span> Biometric Authentication
+      </button>
+      <div class="security-badges">
+        <div class="security-badge"><span class="dot"></span> 256-bit SSL</div>
+        <div class="security-badge"><span class="dot"></span> FDIC Insured</div>
+        <div class="security-badge"><span class="dot"></span> 2FA Active</div>
+      </div>
+      <div class="login-footer-note">
+        🔒 This is a fictional demonstration platform. Not a real financial institution.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================
+     DASHBOARD
+     ============================================ -->
+<div id="dashboard">
+  <div class="dash-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-mark">🏛</div>
+        <div class="logo-text">
+          Olvex Financial
+          <span>Private Banking</span>
+        </div>
+      </div>
+      <div class="sidebar-user">
+        <div class="user-avatar">SH</div>
+        <div class="user-info">
+          <div class="user-name">Sandy Harrison</div>
+          <div class="user-tier">✦ Platinum Elite</div>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Overview</div>
+        <button class="nav-item active" onclick="showPage('overview')" id="nav-overview">
+          <span class="nav-icon">🏠</span> Dashboard
+        </button>
+        <button class="nav-item" onclick="showPage('accounts')" id="nav-accounts">
+          <span class="nav-icon">💳</span> Accounts
+        </button>
+        <button class="nav-item" onclick="showPage('transactions')" id="nav-transactions">
+          <span class="nav-icon">📋</span> Transactions
+        </button>
+
+        <div class="nav-section-title">Money Management</div>
+        <button class="nav-item" onclick="showPage('transfer')" id="nav-transfer">
+          <span class="nav-icon">↗</span> Transfer Funds
+        </button>
+        <button class="nav-item" onclick="showPage('wire')" id="nav-wire">
+          <span class="nav-icon">🌐</span> Wire Transfers
+        </button>
+        <button class="nav-item" onclick="showPage('bills')" id="nav-bills">
+          <span class="nav-icon">🧾</span> Bill Payments
+        </button>
+
+        <div class="nav-section-title">Products</div>
+        <button class="nav-item" onclick="showPage('cards')" id="nav-cards">
+          <span class="nav-icon">💎</span> Credit Cards
+        </button>
+        <button class="nav-item" onclick="showPage('investments')" id="nav-investments">
+          <span class="nav-icon">📈</span> Investments
+        </button>
+        <button class="nav-item" onclick="showPage('loans')" id="nav-loans">
+          <span class="nav-icon">🏦</span> Loans
+        </button>
+        <button class="nav-item" onclick="showPage('mortgage')" id="nav-mortgage">
+          <span class="nav-icon">🏠</span> Mortgage Center
+        </button>
+        <button class="nav-item" onclick="showPage('rewards')" id="nav-rewards">
+          <span class="nav-icon">⭐</span> Rewards Program
+        </button>
+
+        <div class="nav-section-title">Documents</div>
+        <button class="nav-item" onclick="showPage('statements')" id="nav-statements">
+          <span class="nav-icon">📄</span> Statements
+        </button>
+        <button class="nav-item" onclick="showPage('taxes')" id="nav-taxes">
+          <span class="nav-icon">📊</span> Tax Documents
+        </button>
+
+        <div class="nav-section-title">Security &amp; Support</div>
+        <button class="nav-item" onclick="showPage('security')" id="nav-security">
+          <span class="nav-icon">🛡</span> Security Center
+          <span class="nav-badge">2</span>
+        </button>
+        <button class="nav-item" onclick="showPage('messages')" id="nav-messages">
+          <span class="nav-icon">✉</span> Secure Messages
+          <span class="nav-badge">3</span>
+        </button>
+        <button class="nav-item" onclick="showPage('support')" id="nav-support">
+          <span class="nav-icon">💬</span> Customer Support
+        </button>
+        <button class="nav-item" onclick="showPage('profile')" id="nav-profile">
+          <span class="nav-icon">👤</span> Profile Settings
+        </button>
+      </nav>
+      <div class="sidebar-bottom">
+        <button class="logout-btn" onclick="handleLogout()">🚪 Sign Out Securely</button>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+        <div class="topbar-title" id="topbarTitle">Good Evening, Sandy 👋</div>
+        <div class="topbar-actions">
+          <button class="topbar-btn" onclick="toggleTheme()" id="themeBtn" title="Toggle Theme">🌙</button>
+          <button class="topbar-btn" onclick="showPage('messages')" title="Messages">
+            ✉<span class="badge">3</span>
+          </button>
+          <button class="topbar-btn" onclick="openModal('notifModal')" title="Notifications">
+            🔔<span class="badge">5</span>
+          </button>
+          <button class="topbar-btn" onclick="showPage('profile')" title="Profile">⚙</button>
+        </div>
+      </header>
+
+      <div class="page-content">
+
+        <!-- =========== OVERVIEW PAGE =========== -->
+        <div class="dash-page active" id="page-overview">
+
+          <!-- Alert Banner -->
+          <div class="alert-banner info" id="welcomeAlert">
+            <span style="font-size:18px">✦</span>
+            <div>
+              <strong>Welcome back, Sandy.</strong> Your portfolio grew by <strong style="color:var(--green)">+2.4%</strong> this month.
+              <span style="color:var(--gray-400)">Last login: Today, 6:15 PM EST from New York, NY</span>
+            </div>
+            <button onclick="this.parentElement.remove()" style="background:none;border:none;color:var(--gray-400);cursor:pointer;font-size:16px;margin-left:auto;">✕</button>
+          </div>
+
+          <!-- Balance Cards -->
+          <div class="grid-4" style="margin-bottom:24px;">
+            <div class="balance-card balance-card-1" onclick="showPage('accounts')">
+              <div class="card-label">Checking Account</div>
+              <div class="card-amount">$12,654,567</div>
+              <div class="card-change">✦ Available Balance: $12,654,567.88</div>
+              <div class="card-icon">💳</div>
+            </div>
+            <div class="balance-card balance-card-2" onclick="showPage('accounts')">
+              <div class="card-label">Savings Account</div>
+              <div class="card-amount">$4,250,000</div>
+              <div class="card-change">↑ +$125,000 this month</div>
+              <div class="card-icon">🏦</div>
+            </div>
+            <div class="balance-card balance-card-3" onclick="showPage('investments')">
+              <div class="card-label">Investment Portfolio</div>
+              <div class="card-amount">$8,780,000</div>
+              <div class="card-change">↑ +$210,750 today</div>
+              <div class="card-icon">📈</div>
+            </div>
+            <div class="balance-card balance-card-4" onclick="showPage('cards')">
+              <div class="card-label">Credit Available</div>
+              <div class="card-amount">$120,000</div>
+              <div class="card-change">Credit Limit: $160,000</div>
+              <div class="card-icon">💎</div>
+            </div>
+          </div>
+
+          <!-- Quick Actions -->
+          <div class="card" style="margin-bottom:24px;">
+            <div class="section-header">
+              <div>
+                <div class="section-title">Quick Actions</div>
+                <div class="section-subtitle">Frequently used banking services</div>
+              </div>
+            </div>
+            <div class="quick-actions">
+              <button class="quick-action-btn" onclick="openModal('transferModal')">
+                <span class="qa-icon">↗</span><span>Send Money</span>
+              </button>
+              <button class="quick-action-btn" onclick="openModal('wireModal')">
+                <span class="qa-icon">🌐</span><span>Wire Transfer</span>
+              </button>
+              <button class="quick-action-btn" onclick="openModal('billModal')">
+                <span class="qa-icon">🧾</span><span>Pay Bills</span>
+              </button>
+              <button class="quick-action-btn" onclick="openModal('depositModal')">
+                <span class="qa-icon">⬇</span><span>Mobile Deposit</span>
+              </button>
+              <button class="quick-action-btn" onclick="showPage('cards')">
+                <span class="qa-icon">💳</span><span>Card Controls</span>
+              </button>
+              <button class="quick-action-btn" onclick="showPage('investments')">
+                <span class="qa-icon">📊</span><span>Invest</span>
+              </button>
+              <button class="quick-action-btn" onclick="showPage('rewards')">
+                <span class="qa-icon">⭐</span><span>Redeem Points</span>
+              </button>
+              <button class="quick-action-btn" onclick="showPage('support')">
+                <span class="qa-icon">📞</span><span>Contact Us</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="grid-2" style="margin-bottom:24px;align-items:start;">
+            <!-- Recent Transactions -->
+            <div class="card">
+              <div class="section-header">
+                <div>
+                  <div class="section-title">Recent Transactions</div>
+                  <div class="section-subtitle">Last 7 days activity</div>
+                </div>
+                <button class="btn-sm btn-secondary" onclick="showPage('transactions')">View All</button>
+              </div>
+              <div class="transactions-list" id="recentTxList"></div>
+            </div>
+
+            <!-- Credit Score & Financial Insights -->
+            <div style="display:flex;flex-direction:column;gap:20px;">
+              <div class="card card-gold">
+                <div class="section-title" style="margin-bottom:16px;">Credit Score</div>
+                <div class="credit-score-ring">
+                  <div class="credit-score-inner">
+                    <div class="credit-score-num">845</div>
+                    <div class="credit-score-label">EXCEPTIONAL</div>
+                  </div>
+                </div>
+                <div style="margin-top:16px;">
+                  <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--gray-400);margin-bottom:6px;">
+                    <span>Poor</span><span>Fair</span><span>Good</span><span>Exceptional</span>
+                  </div>
+                  <div class="progress-bar-track">
+                    <div class="progress-bar-fill" style="width:94%;background:linear-gradient(90deg,var(--red),var(--amber),var(--green),var(--teal));"></div>
+                  </div>
+                </div>
+                <div style="display:flex;justify-content:space-between;margin-top:16px;">
+                  <div style="text-align:center">
+                    <div style="font-size:18px;font-weight:800;color:var(--gold)">0</div>
+                    <div style="font-size:10px;color:var(--gray-500)">Missed Payments</div>
+                  </div>
+                  <div style="text-align:center">
+                    <div style="font-size:18px;font-weight:800;color:var(--green)">12yr</div>
+                    <div style="font-size:10px;color:var(--gray-500)">Credit History</div>
+                  </div>
+                  <div style="text-align:center">
+                    <div style="font-size:18px;font-weight:800;color:var(--blue-bright)">8%</div>
+                    <div style="font-size:10px;color:var(--gray-500)">Utilization</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Upcoming Payments -->
+              <div class="card">
+                <div class="section-title" style="margin-bottom:16px;">Upcoming Payments</div>
+                <div id="upcomingPayments"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts Row -->
+          <div class="grid-2" style="margin-bottom:24px;">
+            <div class="card">
+              <div class="section-header">
+                <div>
+                  <div class="section-title">Cash Flow</div>
+                  <div class="section-subtitle">Income vs Expenses (6 months)</div>
+                </div>
+              </div>
+              <div class="chart-container" style="height:220px;">
+                <canvas id="cashFlowChart"></canvas>
+              </div>
+            </div>
+            <div class="card">
+              <div class="section-header">
+                <div>
+                  <div class="section-title">Spending Analytics</div>
+                  <div class="section-subtitle">Current month breakdown</div>
+                </div>
+              </div>
+              <div class="chart-container" style="height:220px;">
+                <canvas id="spendingChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Financial Insights -->
+          <div class="card" style="margin-bottom:24px;">
+            <div class="section-header">
+              <div class="section-title">💡 Financial Insights</div>
+              <span class="tag tag-gold">AI Powered</span>
+            </div>
+            <div class="grid-3">
+              <div style="padding:16px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:12px;">
+                <div style="font-size:20px;margin-bottom:8px;">📈</div>
+                <div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:4px;">Portfolio Outperforming</div>
+                <div style="font-size:12px;color:var(--gray-400);">Your investments beat S&P 500 by 3.2% this quarter. Consider rebalancing into tech growth sectors.</div>
+              </div>
+              <div style="padding:16px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:12px;">
+                <div style="font-size:20px;margin-bottom:8px;">⭐</div>
+                <div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:4px;">2.85M Points Expiring</div>
+                <div style="font-size:12px;color:var(--gray-400);">You have reward points worth ~$28,500. Use them before they expire in March 2027.</div>
+              </div>
+              <div style="padding:16px;background:rgba(37,99,235,0.08);border:1px solid rgba(37,99,235,0.2);border-radius:12px;">
+                <div style="font-size:20px;margin-bottom:8px;">🏠</div>
+                <div style="font-size:13px;font-weight:700;color:var(--blue-bright);margin-bottom:4px;">Refinance Opportunity</div>
+                <div style="font-size:12px;color:var(--gray-400);">Current mortgage rates dropped 0.5%. Refinancing could save $3,200/month on your property.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Security Alert & Recent Login -->
+          <div class="grid-2">
+            <div class="card">
+              <div class="section-title" style="margin-bottom:16px;">🛡 Security Alerts</div>
+              <div class="alert-banner success">
+                <span>✅</span>
+                <div>All systems secure. No suspicious activity detected.</div>
+              </div>
+              <div id="securityAlerts"></div>
+            </div>
+            <div class="card">
+              <div class="section-title" style="margin-bottom:16px;">🕐 Recent Login Activity</div>
+              <div id="loginActivity"></div>
+            </div>
+          </div>
+
+        </div><!-- end overview -->
+
+        <!-- =========== ACCOUNTS PAGE =========== -->
+        <div class="dash-page" id="page-accounts">
+          <div class="section-header">
+            <div>
+              <div class="section-title">My Accounts</div>
+              <div class="section-subtitle">OLVX-2026-001 · Premier Private Banking</div>
+            </div>
+            <button class="btn-sm btn-primary" onclick="openModal('newAccountModal')">+ Open New Account</button>
+          </div>
+
+          <div class="alert-banner info" style="margin-bottom:20px;">
+            <span>ℹ</span>
+            <div>Your total assets across all accounts: <strong>$25,684,567.88</strong> · Relationship since 2014</div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:24px;">
+            <div class="card" style="border-color:rgba(37,99,235,0.4);">
+              <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+                <div style="width:50px;height:50px;background:linear-gradient(135deg,#1e4db7,#0a1e5e);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;">💳</div>
+                <div style="flex:1;">
+                  <div style="font-size:16px;font-weight:700;">Premier Checking Account</div>
+                  <div style="font-size:12px;color:var(--gray-400);">Account No: ****8847 · Routing: 021000021</div>
+                  <div style="margin-top:6px;display:flex;gap:8px;flex-wrap:wrap;">
+                    <span class="tag tag-blue">Primary</span>
+                    <span class="tag tag-green">Active</span>
+                    <span class="tag tag-gold">Platinum Elite</span>
+                  </div>
+                </div>
+                <div style="text-align:right;">
+                  <div style="font-size:26px;font-weight:900;color:var(--blue-bright);">$12,654,567.88</div>
+                  <div style="font-size:12px;color:var(--gray-400);">Available Balance</div>
+                  <div style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end;">
+                    <button class="btn-sm btn-secondary" onclick="openModal('transferModal')">Transfer</button>
+                    <button class="btn-sm btn-primary" onclick="openModal('depositModal')">Deposit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card" style="border-color:rgba(201,168,76,0.4);">
+              <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+                <div style="width:50px;height:50px;background:linear-gradient(135deg,#a07830,#5a3f10);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;">🏦</div>
+                <div style="flex:1;">
+                  <div style="font-size:16px;font-weight:700;">High-Yield Savings Account</div>
+                  <div style="font-size:12px;color:var(--gray-400);">Account No: ****3291 · APY: 5.25%</div>
+                  <div style="margin-top:6px;display:flex;gap:8px;flex-wrap:wrap;">
+                    <span class="tag tag-gold">5.25% APY</span>
+                    <span class="tag tag-green">Active</span>
+                  </div>
+                </div>
+                <div style="text-align:right;">
+                  <div style="font-size:26px;font-weight:900;color:var(--gold);">$4,250,000.00</div>
+                  <div style="font-size:12px;color:var(--gray-400);">Available Balance</div>
+                  <div style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end;">
+                    <button class="btn-sm btn-secondary" onclick="openModal('transferModal')">Transfer</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card" style="border-color:rgba(16,185,129,0.4);">
+              <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+                <div style="width:50px;height:50px;background:linear-gradient(135deg,#0d7a6e,#053d38);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;">📈</div>
+                <div style="flex:1;">
+                  <div style="font-size:16px;font-weight:700;">Investment Brokerage Account</div>
+                  <div style="font-size:12px;color:var(--gray-400);">Account No: ****7102 · Managed Portfolio</div>
+                  <div style="margin-top:6px;display:flex;gap:8px;flex-wrap:wrap;">
+                    <span class="tag tag-green">+18.4% YTD</span>
+                    <span class="tag tag-blue">Managed</span>
+                  </div>
+                </div>
+                <div style="text-align:right;">
+                  <div style="font-size:26px;font-weight:900;color:var(--green);">$8,780,000.00</div>
+                  <div style="font-size:12px;color:var(--gray-400);">Portfolio Value</div>
+                  <div style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end;">
+                    <button class="btn-sm btn-secondary" onclick="showPage('investments')">View Holdings</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="card">
+              <div class="section-title" style="margin-bottom:16px;">Account Statistics</div>
+              <div class="stat-row">
+                <div class="stat-item">
+                  <div class="stat-value">$25.6M</div>
+                  <div class="stat-label">Total Assets</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-value">+18.4%</div>
+                  <div class="stat-label">YTD Return</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-value">12yr</div>
+                  <div class="stat-label">Client Since</div>
+                </div>
+              </div>
+            </div>
+            <div class="card chart-container" style="height:auto;">
+              <div class="section-title" style="margin-bottom:16px;">Asset Allocation</div>
+              <div style="height:160px;">
+                <canvas id="allocationChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =========== TRANSACTIONS PAGE =========== -->
+        <div class="dash-page" id="page-transactions">
+          <div class="section-header">
+            <div>
+              <div class="section-title">Transaction History</div>
+              <div class="section-subtitle">Complete record of all account activity</div>
+            </div>
+            <div style="display:flex;gap:8px;">
+              <button class="btn-sm btn-secondary" onclick="openModal('filterModal')">⚙ Filter</button>
+              <button class="btn-sm btn-primary" onclick="exportTransactions()">⬇ Export</button>
+            </div>
+          </div>
+          <div class="card">
+            <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
+              <input type="text" placeholder="🔍 Search transactions..." style="flex:1;min-width:200px;padding:10px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:var(--white);font-size:13px;outline:none;font-family:'Inter',sans-serif;" id="txSearch" oninput="filterTransactions()">
+              <select style="padding:10px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:var(--white);font-size:13px;outline:none;font-family:'Inter',sans-serif;" id="txTypeFilter" onchange="filterTransactions()">
+                <option value="">All Types</option>
+                <option value="Deposit">Deposits</option>
+                <option value="Transfer">Transfers</option>
+                <option value="Payment">Payments</option>
+                <option value="Withdrawal">Withdrawals</option>
+              </select>
+            </div>
+            <div id="fullTxList"></div>
+          </div>
+        </div>
+
+        <!-- =========== TRANSFER PAGE =========== -->
+        <div class="dash-page" id="page-transfer">
+          <div class="section-title" style="margin-bottom:20px;">Transfer Funds</div>
+          <div class="grid-2" style="align-items:start;">
+            <div class="card">
+              <div class="section-title" style="margin-bottom:20px;">Internal Transfer</div>
+              <div class="modal-field">
+                <label>From Account</label>
+                <select>
+                  <option>Premier Checking ****8847 — $12,654,567.88</option>
+                  <option>High-Yield Savings ****3291 — $4,250,000.00</option>
+                </select>
+              </div>
+              <div class="modal-field">
+                <label>To Account</label>
+                <select>
+                  <option>High-Yield Savings ****3291 — $4,250,000.00</option>
+                  <option>Premier Checking ****8847 — $12,654,567.88</option>
+                  <option>Investment Brokerage ****7102</option>
+                </select>
+              </div>
+              <div class="modal-field">
+                <label>Amount</label>
+                <input type="number" placeholder="$0.00" min="0">
+              </div>
+              <div class="modal-field">
+                <label>Transfer Date</label>
+                <input type="date" id="transferDate">
+              </div>
+              <div class="modal-field">
+                <label>Note (Optional)</label>
+                <input type="text" placeholder="Add a memo">
+              </div>
+              <button class="btn-sm btn-primary" style="width:100%;padding:14px;font-size:14px;margin-top:8px;" onclick="simulateTransfer()">
+                ↗ Initiate Transfer
+              </button>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:16px;">
+              <div class="card card-blue">
+                <div class="section-title" style="margin-bottom:12px;">Transfer Limits</div>
+                <div style="display:flex;flex-direction:column;gap:10px;font-size:13px;">
+                  <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray-400)">Daily Limit</span><span style="font-weight:700;">$5,000,000</span></div>
+                  <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray-400)">Used Today</span><span style="font-weight:700;color:var(--green);">$0</span></div>
+                  <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray-400)">Remaining</span><span style="font-weight:700;color:var(--gold);">$5,000,000</span></div>
+                  <div class="progress-bar-track"><div class="progress-bar-fill" style="width:0%"></div></div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="section-title" style="margin-bottom:12px;">Recent Recipients</div>
+                <div id="recentRecipients"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =========== WIRE TRANSFERS PAGE =========== -->
+        <div class="dash-page" id="page-wire">
+          <div class="section-header">
+            <div class="section-title">Wire Transfers</div>
+            <button class="btn-sm btn-primary" onclick="openModal('wireModal')">+ New Wire</button>
+          </div>
+          <div class="grid-2" style="align-items:start;">
+            <div class="card">
+              <div class="section-title" style="margin-bottom:20px;">Initiate Wire Transfer</div>
+              <div class="modal-field"><label>Beneficiary Name</label><input type="text" placeholder="Full legal name"></div>
+              <div class="modal-field"><label>Bank Name</label><input type="text" placeholder="Receiving bank name"></div>
+              <div class="modal-field"><label>Account / IBAN Number</label><input type="text" placeholder="Account or IBAN number"></div>
+              <div class="modal-field"><label>Routing / SWIFT / BIC</label><input type="text" placeholder="Routing or SWIFT code"></div>
+              <div class="modal-field"><label>Country</label>
+                <select>
+                  <option>United States</option><option>United Kingdom</option><option>Germany</option>
+                  <option>France</option><option>Switzerland</option><option>Japan</option><option>Singapore</option>
+                </select>
+              </div>
+              <div class="modal-field"><label>Amount (USD)</label><input type="number" placeholder="$0.00"></div>
+              <div class="modal-field"><label>Purpose / Reference</label><input type="text" placeholder="Payment reference"></div>
+              <button class="btn-sm btn-primary" style="width:100%;padding:14px;font-size:14px;margin-top:8px;" onclick="simulateWire()">
+                🌐 Send Wire Transfer
+              </button>
+              <div style="margin-top:12px;font-size:11px;color:var(--gray-500);text-align:center;">Wire cutoff: 4:00 PM EST · Processed within 1-3 business days</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:16px;">
+              <div class="card card-gold">
+                <div class="section-title" style="margin-bottom:12px;">Wire Fees</div>
+                <div style="font-size:13px;display:flex;flex-direction:column;gap:8px;">
+                  <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray-400)">Domestic Wire</span><span style="font-weight:700;color:var(--green);">$0 (Waived)</span></div>
+                  <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray-400)">International Wire</span><span style="font-weight:700;">$15 flat fee</span></div>
+                  <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray-400)">Daily Limit</span><span style="font-weight:700;">$10,000,000</span></div>
+                  <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray-400)">Per Transaction Limit</span><span style="font-weight:700;">$2,500,000</span></div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="section-title" style="margin-bottom:12px;">Recent Wire History</div>
+                <div id="wireHistory"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =========== BILLS PAGE =========== -->
+        <div class="dash-page" id="page-bills">
+          <div class="section-header">
+            <div class="section-title">Bill Payments</div>
+            <button class="btn-sm btn-primary" onclick="openModal('billModal')">+ Add Payee</button>
+          </div>
+          <div class="grid-2" style="align-items:start;">
+            <div class="card">
+              <div class="section-title" style="margin-bottom:16px;">Saved Payees</div>
+              <div id="billPayees"></div>
+            </div>
+            <div class="card">
+              <div class="section-title" style="margin-bottom:16px;">Pay a Bill</div>
+              <div class="modal-field"><label>Select Payee</label>
+                <select>
+                  <option>American Express — Credit Card</option>
+                  <option>Con Edison — Electric</option>
+                  <option>Verizon — Phone & Internet</option>
+                  <option>Property Tax — NYC DOF</option>
+                </select>
+              </div>
+              <div class="modal-field"><label>Amount</label><input type="number" placeholder="$0.00"></div>
+              <div class="modal-field"><label>Payment Date</label><input type="date"></div>
+              <div class="modal-field"><label>From Account</label>
+                <select>
+                  <option>Premier Checking ****8847</option>
+                  <option>High-Yield Savings ****3291</option>
+                </select>
+              </div>
+              <button class="btn-sm btn-primary" style="width:100%;padding:14px;font-size:14px;margin-top:8px;" onclick="simulateBillPay()">
+                🧾 Schedule Payment
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- =========== CREDIT CARDS PAGE =========== -->
+        <div class="dash-page" id="page-cards">
+          <div class="section-header">
+            <div class="section-title">Credit Cards</div>
+            <button class="btn-sm btn-primary" onclick="openModal('cardControlModal')">Apply for Card</button>
+          </div>
+          <div class="grid-2" style="align-items:start;">
+            <div>
+              <!-- Card Visual -->
+              <div style="background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);border-radius:20px;padding:32px;position:relative;overflow:hidden;margin-bottom:20px;min-height:200px;box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+                <div style="position:absolute;width:200px;height:200px;border-radius:50%;background:rgba(201,168,76,0.08);top:-60px;right:-40px;"></div>
+                <div style="position:absolute;width:150px;height:150px;border-radius:50%;background:rgba(37,99,235,0.08);bottom:-40px;left:20px;"></div>
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:30px;position:relative;">
+                  <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Olvex Financial</div>
+                  <div style="font-size:28px;font-weight:900;color:var(--gold);">VISA</div>
+                </div>
+                <div style="font-size:18px;letter-spacing:4px;font-weight:600;margin-bottom:20px;color:rgba(255,255,255,0.9);">•••• •••• •••• 4821</div>
+                <div style="display:flex;justify-content:space-between;align-items:flex-end;position:relative;">
+                  <div>
+                    <div style="font-size:10px;color:rgba(255,255,255,0.5);letter-spacing:1px;text-transform:uppercase;">Card Holder</div>
+                    <div style="font-size:14px;font-weight:700;letter-spacing:1px;">SANDY HARRISON</div>
+                  </div>
+                  <div style="text-align:right;">
+                    <div style="font-size:10px;color:rgba(255,255,255,0.5);letter-spacing:1px;text-transform:uppercase;">Expires</div>
+                    <div style="font-size:14px;font-weight:700;">12/29</div>
+                  </div>
+                  <div style="display:flex;gap:-8px;align-items:center;">
+                    <div style="width:36px;height:36px;border-radius:50%;background:rgba(201,168,76,0.7);"></div>
+                    <div style="width:36px;height:36px;border-radius:50%;background:rgba(201,168,76,0.4);margin-left:-12px;"></div>
+                  </div>
+                </div>
+                <div style="margin-top:16px;padding:8px 14px;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);border-radius:8px;display:inline-block;">
+                  <span style="font-size:11px;color:var(--gold);font-weight:600;letter-spacing:1px;">✦ PLATINUM ELITE · UNLIMITED REWARDS</span>
+                </div>
+              </div>
+              <div class="card">
+                <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
+                  <span style="color:var(--gray-400);font-size:13px;">Balance</span>
+                  <span style="font-weight:700;color:var(--red);">$160,000.00</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+                  <span style="color:var(--gray-400);font-size:13px;">Credit Limit</span>
+                  <span style="font-weight:700;">$120,000.00</span>
+                </div>
+                <div class="progress-bar-track">
+                  <div class="progress-bar-fill" style="width:75%;background:linear-gradient(90deg,var(--green),var(--amber));"></div>
+                </div>
+                <div style="font-size:11px;color:var(--gray-500);margin-top:6px;text-align:right;">75% utilized · Minimum Due: $4,500</div>
+                <div style="margin-top:16px;display:flex;gap:8px;">
+                  <button class="btn-sm btn-primary" onclick="openModal('cardPayModal')" style="flex:1;">💳 Make Payment</button>
+                  <button class="btn-sm btn-secondary" onclick="openModal('cardControlModal')" style="flex:1;">⚙ Card Controls</button>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:16px;">
+              <div class="card card-gold">
+                <div class="section-title" style="margin-bottom:12px;">Rewards Summary</div>
+                <div style="font-size:36px;font-weight:900;color:var(--gold);text-align:center;">2,850,000</div>
+                <div style="text-align:center;color:var(--gray-400);font-size:12px;margin-bottom:16px;">Total Points · Worth $28,500</div>
+                <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px;">
+                  <span style="color:var(--gray-400)">Monthly Cashback</span>
+                  <span style="font-weight:700;color:var(--green);">$12,500.00</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;font-size:13px;">
+                  <span style="color:var(--gray-400)">Points Earned This Month</span>
+                  <span style="font-weight:700;">125,000 pts</span>
+                </div>
+                <button class="btn-sm btn-primary" style="width:100%;margin-top:16px;padding:12px;" onclick="showPage('rewards')">⭐ Redeem Points</button>
+              </div>
+              <div class="card">
+                <div class="section-title" style="margin-bottom:12px;">Card Controls</div>
+                <div class="security-item" style="padding:10px 0;">
+                  <div class="sec-icon green">💳</div>
+                  <div class="sec-info"><div class="sec-title">Card Status</div><div class="sec-desc">Active & Enabled</div></div>
+                  <label class="toggle-switch"><input type="checkbox" checked onchange="toggleCardStatus(this)"><span class="toggle-slider"></span></label>
+                </div>
+                <div class="security-item" style="padding:10px 0;">
+                  <div class="sec-icon blue">🌐</div>
+                  <div class="sec-info"><div class="sec-title">International Transactions</div><div class="sec-desc">Enabled for all regions</div></div>
+                  <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                </div>
+                <div class="security-item" style="padding:10px 0;">
+                  <div class="sec-icon amber">📱</div>
+                  <div class="sec-info"><div class="sec-title">Online Purchases</div><div class="sec-desc">E-commerce enabled</div></div>
+                  <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                </div>
+                <div class="security-item" style="padding:10px 0;">
+                  <div class="sec-icon green">🏧</div>
+                  <div class="sec-info"><div class="sec-title">ATM Withdrawals</div><div class="sec-desc">Global ATM access</div></div>
+                  <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =========== INVESTMENTS PAGE =========== -->
+        <div class="dash-page" id="page-investments">
+          <div class="section-header">
+            <div>
+              <div class="section-title">Investment Portfolio</div>
+              <div class="section-subtitle">Total Value: $8,780,000 · YTD Return: +18.4%</div>
+            </div>
+            <div style="display:flex;gap:8px;">
+              <button class="btn-sm btn-secondary" onclick="openModal('tradeModal')">📈 Trade</button>
+              <button class="btn-sm btn-primary" onclick="openModal('investModal')">+ Invest More</button>
+            </div>
+          </div>
+          <div class="grid-2" style="margin-bottom:20px;">
+            <div class="card">
+              <div class="section-title" style="margin-bottom:16px;">Asset Allocation</div>
+              <div style="height:200px;"><canvas id="investAllocChart"></canvas></div>
+            </div>
+            <div class="card">
+              <div class="section-title" style="margin-bottom:16px;">Performance (12 Months)</div>
+              <div style="height:200px;"><canvas id="investPerfChart"></canvas></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="section-title" style="margin-bottom:16px;">Holdings</div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Symbol</th><th>Name</th><th>Shares</th>
+                  <th>Price</th><th>Value</th><th>Gain/Loss</th><th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="holdingsTable"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- =========== LOANS PAGE =========== -->
+        <div class="dash-page" id="page-loans">
+          <div class="section-header">
+            <div class="section-title">Loans &amp; Credit Facilities</div>
+            <button class="btn-sm btn-primary" onclick="openModal('loanApplyModal')">Apply for Loan</button>
+          </div>
+          <div class="grid-3" style="margin-bottom:20px;">
+            <div class="card card-blue">
+              <div style="font-size:20px;margin-bottom:8px;">🏎</div>
+              <div style="font-size:14px;font-weight:700;">Auto Loan</div>
+              <div style="font-size:22px;font-weight:800;color:var(--blue-bright);margin:8px 0;">$285,000</div>
+              <div style="font-size:12px;color:var(--gray-400);">Outstanding Balance</div>
+              <div style="margin-top:8px;font-size:12px;display:flex;justify-content:space-between;">
+                <span style="color:var(--gray-400)">Rate</span><span style="color:var(--green);font-weight:700;">3.49% APR</span>
+              </div>
+              <div class="progress-bar-track" style="margin-top:10px;"><div class="progress-bar-fill" style="width:35%;"></div></div>
+              <div style="font-size:11px;color:var(--gray-500);margin-top:4px;">35% remaining</div>
+            </div>
+            <div class="card card-gold">
+              <div style="font-size:20px;margin-bottom:8px;">💼</div>
+              <div style="font-size:14px;font-weight:700;">Business Line of Credit</div>
+              <div style="font-size:22px;font-weight:800;color:var(--gold);margin:8px 0;">$2,500,000</div>
+              <div style="font-size:12px;color:var(--gray-400);">Available Credit</div>
+              <div style="margin-top:8px;font-size:12px;display:flex;justify-content:space-between;">
+                <span style="color:var(--gray-400)">Rate</span><span style="color:var(--green);font-weight:700;">Prime + 0.5%</span>
+              </div>
+              <div class="progress-bar-track" style="margin-top:10px;"><div class="progress-bar-fill" style="width:0%;"></div></div>
+              <div style="font-size:11px;color:var(--gray-500);margin-top:4px;">$0 drawn · Full capacity available</div>
+            </div>
+            <div class="card card-green">
+              <div style="font-size:20px;margin-bottom:8px;">📋</div>
+              <div style="font-size:14px;font-weight:700;">Personal Loan</div>
+              <div style="font-size:22px;font-weight:800;color:var(--green);margin:8px 0;">$0</div>
+              <div style="font-size:12px;color:var(--gray-400);">No Active Loans</div>
+              <div style="margin-top:8px;font-size:12px;color:var(--gray-400);">Pre-approved up to $500,000 at 5.9% APR</div>
+              <button class="btn-sm btn-primary" style="width:100%;margin-top:12px;" onclick="openModal('loanApplyModal')">Apply Now</button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="section-title" style="margin-bottom:16px;">Loan Payment Schedule</div>
+            <table class="data-table">
+              <thead><tr><th>Loan</th><th>Next Payment</th><th>Amount</th><th>Remaining Balance</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>Auto Loan ****2847</td>
+                  <td>Jul 1, 2026</td>
+                  <td style="font-weight:700;">$3,850.00</td>
+                  <td>$285,000</td>
+                  <td><span class="tx-status completed">Current</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- =========== MORTGAGE PAGE =========== -->
+        <div class="dash-page" id="page-mortgage">
+          <div class="section-header">
+            <div class="section-title">Mortgage Center</div>
+            <button class="btn-sm btn-primary" onclick="openModal('mortgageModal')">Apply / Refinance</button>
+          </div>
+          <div class="grid-2" style="align-items:start;margin-bottom:20px;">
+            <div class="card" style="border-color:rgba(201,168,76,0.4);">
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+                <div style="font-size:32px;">🏡</div>
+                <div>
+                  <div style="font-size:16px;font-weight:700;">Primary Residence</div>
+                  <div style="font-size:12px;color:var(--gray-400);">Upper East Side, New York, NY 10028</div>
+                </div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:10px;font-size:13px;">
+                <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray-400)">Original Loan Amount</span><span style="font-weight:700;">$4,500,000</span></div>
+                <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray-400)">Outstanding Balance</span><span style="font-weight:700;color:var(--gold);">$3,142,800</span></div>
+                <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray-400)">Property Value (Est.)</span><span style="font-weight:700;color:var(--green);">$7,200,000</span></div>
+                <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray-400)">Equity</span><span style="font-weight:700;color:var(--green);">$4,057,200 (56%)</span></div>
+                <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray-400)">Interest Rate</span><span style="font-weight:700;">3.125% Fixed (30yr)</span></div>
+                <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray-400)">Monthly Payment</span><span style="font-weight:700;">$19,270.00</span></div>
+                <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray-400)">Next Payment</span><span style="font-weight:700;">Jul 1, 2026</span></div>
+              </div>
+              <div class="progress-bar-track" style="margin-top:16px;">
+                <div class="progress-bar-fill" style="width:30%;"></div>
+              </div>
+              <div style="font-size:11px;color:var(--gray-500);margin-top:4px;">30% paid off · Payoff: March 2048</div>
+              <div style="margin-top:14px;display:flex;gap:8px;">
+                <button class="btn-sm btn-primary" onclick="simulateMortgagePayment()" style="flex:1;">💳 Make Payment</button>
+                <button class="btn-sm btn-secondary" onclick="openModal('mortgageModal')" style="flex:1;">🔄 Refinance</button>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:16px;">
+              <div class="card card-gold">
+                <div class="section-title" style="margin-bottom:12px;">Refinance Opportunity</div>
+                <div class="alert-banner info" style="margin-bottom:12px;">
+                  <span>💡</span>
+                  <div>Current market rate: <strong>2.65% fixed</strong>. Save $3,200/month!</div>
+                </div>
+                <div style="font-size:13px;display:flex;flex-direction:column;gap:8px;">
+                  <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray-400)">Current Rate</span><span style="font-weight:700;">3.125%</span></div>
+                  <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray-400)">Refinance Rate</span><span style="font-weight:700;color:var(--green);">2.65%</span></div>
+                  <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray-400)">Monthly Savings</span><span style="font-weight:700;color:var(--gold);">$3,200</span></div>
+                </div>
+                <button class="btn-sm btn-primary" style="width:100%;margin-top:14px;" onclick="openModal('mortgageModal')">Apply to Refinance</button>
+              </div>
+              <div class="card">
+                <div class="section-title" style="margin-bottom:12px;">Amortization</div>
+                <div style="height:150px;"><canvas id="mortgageChart"></canvas></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =========== STATEMENTS PAGE =========== -->
+        <div class="dash-page" id="page-statements">
+          <div class="section-header">
+            <div class="section-title">Account Statements</div>
+            <button class="btn-sm btn-primary" onclick="showToast('success','Generating custom statement...')">+ Custom Statement</button>
+          </div>
+          <div class="card">
+            <table class="data-table">
+              <thead><tr><th>Period</th><th>Account</th><th>Type</th><th>Status</th><th>Action</th></tr></thead>
+              <tbody id="statementsTable"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- =========== TAX DOCUMENTS PAGE =========== -->
+        <div class="dash-page" id="page-taxes">
+          <div class="section-header">
+            <div class="section-title">Tax Documents</div>
+            <span class="tag tag-gold">Tax Year 2025</span>
+          </div>
+          <div class="grid-2">
+            <div class="card">
+              <div class="section-title" style="margin-bottom:16px;">Available Documents</div>
+              <div id="taxDocs"></div>
+            </div>
+            <div class="card card-blue">
+              <div class="section-title" style="margin-bottom:12px;">Tax Summary 2025</div>
+              <div style="font-size:13px;display:flex;flex-direction:column;gap:10px;">
+                <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray-400)">Total Interest Earned</span><span style="font-weight:700;color:var(--green);">$285,750</span></div>
+                <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray-400)">Dividend Income</span><span style="font-weight:700;color:var(--green);">$342,000</span></div>
+                <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray-400)">Capital Gains</span><span style="font-weight:700;color:var(--green);">$1,240,500</span></div>
+                <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray-400)">Mortgage Interest Paid</span><span style="font-weight:700;color:var(--amber);">$98,200</span></div>
+                <div style="display:flex;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.1);padding-top:10px;"><span style="font-weight:700;">Est. Taxable Income</span><span style="font-weight:700;color:var(--gold);">$1,770,050</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =========== REWARDS PAGE =========== -->
+        <div class="dash-page" id="page-rewards">
+          <div class="section-header">
+            <div>
+              <div class="section-title">Rewards Program</div>
+              <div class="section-subtitle">Olvex Elite Rewards · Platinum Tier</div>
+            </div>
+            <button class="btn-sm btn-primary" onclick="openModal('redeemModal')">Redeem Points</button>
+          </div>
+          <div class="grid-3" style="margin-bottom:20px;">
+            <div class="card card-gold" style="text-align:center;">
+              <div style="font-size:40px;font-weight:900;color:var(--gold);">2,850,000</div>
+              <div style="color:var(--gray-400);font-size:13px;margin-bottom:4px;">Total Points Balance</div>
+              <div style="color:var(--green);font-size:14px;font-weight:700;">≈ $28,500 Value</div>
+            </div>
+            <div class="card card-blue" style="text-align:center;">
+              <div style="font-size:40px;font-weight:900;color:var(--blue-bright);">$12,500</div>
+              <div style="color:var(--gray-400);font-size:13px;margin-bottom:4px;">Monthly Cashback</div>
+              <div style="color:var(--green);font-size:14px;font-weight:700;">Paid on 1st of month</div>
+            </div>
+            <div class="card card-purple" style="text-align:center;">
+              <div style="font-size:40px;font-weight:900;color:var(--purple);">3X</div>
+              <div style="color:var(--gray-400);font-size:13px;margin-bottom:4px;">Points on Dining & Travel</div>
+              <div style="color:var(--gold);font-size:14px;font-weight:700;">Unlimited Earning</div>
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="card">
+              <div class="section-title" style="margin-bottom:16px;">Redeem Options</div>
+              <div id="redeemOptions"></div>
+            </div>
+            <div class="card">
+              <div class="section-title" style="margin-bottom:16px;">Points History</div>
+              <div id="pointsHistory"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =========== SECURITY PAGE =========== -->
+        <div class="dash-page" id="page-security">
+          <div class="section-header">
+            <div class="section-title">Security Center</div>
+            <span class="tag tag-green">✅ All Systems Secure</span>
+          </div>
+          <div class="alert-banner success" style="margin-bottom:20px;">
+            <span>🛡</span>
+            <div>Your account security score is <strong>98/100</strong>. No threats detected. Last scan: Today at 6:00 PM EST.</div>
+          </div>
+          <div class="grid-2" style="align-items:start;">
+            <div style="display:flex;flex-direction:column;gap:16px;">
+              <div class="card">
+                <div class="section-title" style="margin-bottom:12px;">Security Settings</div>
+                <div class="security-item">
+                  <div class="sec-icon green">🔐</div>
+                  <div class="sec-info"><div class="sec-title">Two-Factor Authentication</div><div class="sec-desc">SMS & Authenticator App enabled</div></div>
+                  <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                </div>
+                <div class="security-item">
+                  <div class="sec-icon green">🪪</div>
+                  <div class="sec-info"><div class="sec-title">Biometric Login</div><div class="sec-desc">Face ID & Fingerprint enabled</div></div>
+                  <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                </div>
+                <div class="security-item">
+                  <div class="sec-icon blue">🔔</div>
+                  <div class="sec-info"><div class="sec-title">Transaction Alerts</div><div class="sec-desc">Push, SMS & email notifications</div></div>
+                  <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                </div>
+                <div class="security-item">
+                  <div class="sec-icon amber">🕐</div>
+                  <div class="sec-info"><div class="sec-title">Session Timeout</div><div class="sec-desc">Auto-logout after 15 minutes</div></div>
+                  <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                </div>
+                <div class="security-item">
+                  <div class="sec-icon green">🌐</div>
+                  <div class="sec-info"><div class="sec-title">Fraud Monitoring</div><div class="sec-desc">AI-powered 24/7 monitoring active</div></div>
+                  <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                </div>
+                <div class="security-item" style="border-bottom:none;">
+                  <div class="sec-icon red">📍</div>
+                  <div class="sec-info"><div class="sec-title">Geo-restriction</div><div class="sec-desc">US, EU & Singapore allowed</div></div>
+                  <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:16px;">
+              <div class="card">
+                <div class="section-title" style="margin-bottom:12px;">Device Management</div>
+                <div id="deviceList"></div>
+                <button class="btn-sm btn-danger" style="width:100%;margin-top:12px;" onclick="openModal('revokeDevicesModal')">🚨 Revoke All Other Sessions</button>
+              </div>
+              <div class="card">
+                <div class="section-title" style="margin-bottom:12px;">Recent Login History</div>
+                <div id="loginHistoryFull"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =========== MESSAGES PAGE =========== -->
+        <div class="dash-page" id="page-messages">
+          <div class="section-header">
+            <div class="section-title">Secure Messages</div>
+            <button class="btn-sm btn-primary" onclick="openModal('composeModal')">✉ Compose</button>
+          </div>
+          <div class="grid-2" style="align-items:start;">
+            <div class="card">
+              <div class="section-title" style="margin-bottom:12px;">Inbox</div>
+              <div id="messageList"></div>
+            </div>
+            <div class="card">
+              <div style="padding:40px;text-align:center;color:var(--gray-500);">
+                <div style="font-size:48px;margin-bottom:12px;">✉</div>
+                <div style="font-size:14px;">Select a message to read</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =========== SUPPORT PAGE =========== -->
+        <div class="dash-page" id="page-support">
+          <div class="section-title" style="margin-bottom:20px;">Customer Support</div>
+          <div class="grid-3" style="margin-bottom:20px;">
+            <div class="card" style="text-align:center;cursor:pointer;" onclick="openModal('chatModal')">
+              <div style="font-size:36px;margin-bottom:10px;">💬</div>
+              <div style="font-size:14px;font-weight:700;">Live Chat</div>
+              <div style="font-size:12px;color:var(--gray-400);margin-top:4px;">Available 24/7</div>
+              <span class="tag tag-green" style="margin-top:10px;">Online Now</span>
+            </div>
+            <div class="card" style="text-align:center;cursor:pointer;" onclick="openModal('callModal')">
+              <div style="font-size:36px;margin-bottom:10px;">📞</div>
+              <div style="font-size:14px;font-weight:700;">Call Us</div>
+              <div style="font-size:12px;color:var(--gray-400);margin-top:4px;">1-800-OLVEX-01</div>
+              <span class="tag tag-blue" style="margin-top:10px;">Wait: ~2 min</span>
+            </div>
+            <div class="card" style="text-align:center;cursor:pointer;" onclick="openModal('appointModal')">
+              <div style="font-size:36px;margin-bottom:10px;">📅</div>
+              <div style="font-size:14px;font-weight:700;">Book Appointment</div>
+              <div style="font-size:12px;color:var(--gray-400);margin-top:4px;">Private Banker Meeting</div>
+              <span class="tag tag-gold" style="margin-top:10px;">Priority Access</span>
+            </div>
+          </div>
+          <div class="card">
+            <div class="section-title" style="margin-bottom:16px;">Frequently Asked Questions</div>
+            <div id="faqList"></div>
+          </div>
+        </div>
+
+        <!-- =========== PROFILE PAGE =========== -->
+        <div class="dash-page" id="page-profile">
+          <div class="section-header">
+            <div class="section-title">Profile Settings</div>
+            <button class="btn-sm btn-primary" onclick="openModal('editProfileModal')">✏ Edit Profile</button>
+          </div>
+          <div class="grid-2" style="align-items:start;">
+            <div style="display:flex;flex-direction:column;gap:16px;">
+              <div class="card">
+                <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;">
+                  <div style="width:72px;height:72px;background:linear-gradient(135deg,var(--gold),var(--blue-accent));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:white;border:3px solid rgba(201,168,76,0.5);">SH</div>
+                  <div>
+                    <div style="font-size:20px;font-weight:800;">Sandy Harrison</div>
+                    <div style="color:var(--gold);font-size:12px;font-weight:600;letter-spacing:1px;">✦ PLATINUM ELITE MEMBER</div>
+                    <div style="color:var(--gray-400);font-size:12px;margin-top:2px;">Customer since 2014 · OLVX-2026-001</div>
+                  </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:10px;font-size:13px;">
+                  <div style="display:flex;justify-content:space-between;padding:10px;background:rgba(255,255,255,0.03);border-radius:8px;">
+                    <span style="color:var(--gray-400)">Email</span>
+                    <span style="font-weight:600;">sandy@olvexbank.demo</span>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;padding:10px;background:rgba(255,255,255,0.03);border-radius:8px;">
+                    <span style="color:var(--gray-400)">Phone</span>
+                    <span style="font-weight:600;">+1 (212) 555-8847</span>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;padding:10px;background:rgba(255,255,255,0.03);border-radius:8px;">
+                    <span style="color:var(--gray-400)">Address</span>
+                    <span style="font-weight:600;">740 Park Ave, New York, NY</span>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;padding:10px;background:rgba(255,255,255,0.03);border-radius:8px;">
+                    <span style="color:var(--gray-400)">Citizenship</span>
+                    <span style="font-weight:600)">🇺🇸 United States</span>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;padding:10px;background:rgba(255,255,255,0.03);border-radius:8px;">
+                    <span style="color:var(--gray-400)">Tax ID</span>
+                    <span style="font-weight:600;">***-**-4892</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card card-gold">
+                <div class="section-title" style="margin-bottom:12px;">Membership Benefits</div>
+                <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;">
+                  <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);">✓</span> Dedicated Private Banker</div>
+                  <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);">✓</span> Zero transaction fees globally</div>
+                  <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);">✓</span> Priority customer service</div>
+                  <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);">✓</span> Airport lounge access worldwide</div>
+                  <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);">✓</span> Concierge banking service 24/7</div>
+                  <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);">✓</span> Complimentary wealth management</div>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:16px;">
+              <div class="card">
+                <div class="section-title" style="margin-bottom:16px;">Notification Preferences</div>
+                <div class="security-item">
+                  <div class="sec-info"><div class="sec-title">Transaction Alerts</div><div class="sec-desc">Email & SMS</div></div>
+                  <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                </div>
+                <div class="security-item">
+                  <div class="sec-info"><div class="sec-title">Security Alerts</div><div class="sec-desc">Immediate notification</div></div>
+                  <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                </div>
+                <div class="security-item">
+                  <div class="sec-info"><div class="sec-title">Market Updates</div><div class="sec-desc">Daily digest</div></div>
+                  <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                </div>
+                <div class="security-item">
+                  <div class="sec-info"><div class="sec-title">Promotional Offers</div><div class="sec-desc">Monthly newsletter</div></div>
+                  <label class="toggle-switch"><input type="checkbox"><span class="toggle-slider"></span></label>
+                </div>
+              </div>
+              <div class="card">
+                <div class="section-title" style="margin-bottom:16px;">Account Actions</div>
+                <div style="display:flex;flex-direction:column;gap:10px;">
+                  <button class="btn-sm btn-secondary" style="width:100%;padding:12px;justify-content:center;" onclick="openModal('editProfileModal')">✏ Update Personal Info</button>
+                  <button class="btn-sm btn-secondary" style="width:100%;padding:12px;justify-content:center;" onclick="openModal('changePassModal')">🔑 Change Password</button>
+                  <button class="btn-sm btn-secondary" style="width:100%;padding:12px;justify-content:center;" onclick="showPage('security')">🛡 Security Settings</button>
+                  <button class="btn-sm btn-danger" style="width:100%;padding:12px;justify-content:center;" onclick="openModal('closeAccountModal')">🚨 Close Account Request</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end page-content -->
+
+      <!-- FOOTER -->
+      <footer style="padding:20px 28px;border-top:1px solid rgba(255,255,255,0.05);margin-top:auto;">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+          <div style="font-size:11px;color:var(--gray-500);">
+            <span style="color:var(--gold);font-weight:700;">Olvex Financial Bank</span> · OLVX-2026-001 · Platinum Elite
+          </div>
+          <div style="font-size:11px;color:var(--gray-500);text-align:center;max-width:500px;">
+            ⚠ <em>Olvex Financial Bank is a fictional demonstration banking platform created solely for educational, UI/UX, and software development purposes. It is not a real bank and does not provide financial services.</em>
+          </div>
+          <div style="font-size:11px;color:var(--gray-500);">
+            🔒 256-bit SSL · FDIC Demonstration · © 2026 Olvex Financial
+          </div>
+        </div>
+      </footer>
+    </main>
+  </div>
+</div>
+
+<!-- ============================================
+     MODALS
+     ============================================ -->
+
+<!-- Forgot Password -->
+<div class="modal-overlay" id="forgotModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">🔑 Reset Password</div>
+      <button class="modal-close" onclick="closeModal('forgotModal')">✕</button>
+    </div>
+    <p style="color:var(--gray-400);font-size:13px;margin-bottom:20px;">Enter your email address and we'll send a secure reset link.</p>
+    <div class="modal-field"><label>Email Address</label><input type="email" placeholder="sandy@olvexbank.demo" value="sandy@olvexbank.demo"></div>
+    <div class="modal-field"><label>Verification Method</label>
+      <select><option>Email</option><option>SMS to +1 (212) ***-8847</option><option>Authenticator App</option></select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-secondary" onclick="closeModal('forgotModal')">Cancel</button>
+      <button class="btn-sm btn-primary" onclick="simulateForgotPassword()">Send Reset Link →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Notifications -->
+<div class="modal-overlay" id="notifModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">🔔 Notifications</div>
+      <button class="modal-close" onclick="closeModal('notifModal')">✕</button>
+    </div>
+    <div id="notifList"></div>
+    <div style="margin-top:16px;text-align:center;">
+      <button class="btn-sm btn-secondary" onclick="markAllRead();closeModal('notifModal')">✓ Mark All as Read</button>
+    </div>
+  </div>
+</div>
+
+<!-- Transfer Modal -->
+<div class="modal-overlay" id="transferModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">↗ Send Money</div>
+      <button class="modal-close" onclick="closeModal('transferModal')">✕</button>
+    </div>
+    <div class="modal-field"><label>From</label>
+      <select><option>Premier Checking ****8847 — $12,654,567.88</option><option>Savings ****3291 — $4,250,000.00</option></select>
+    </div>
+    <div class="modal-field"><label>To (Recipient)</label><input type="text" placeholder="Name or account number"></div>
+    <div class="modal-field"><label>Amount</label><input type="number" id="transferAmt" placeholder="$0.00"></div>
+    <div class="modal-field"><label>Note</label><input type="text" placeholder="What's this for?"></div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-secondary" onclick="closeModal('transferModal')">Cancel</button>
+      <button class="btn-sm btn-primary" onclick="simulateTransfer()">Send Money →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Wire Modal -->
+<div class="modal-overlay" id="wireModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">🌐 Wire Transfer</div>
+      <button class="modal-close" onclick="closeModal('wireModal')">✕</button>
+    </div>
+    <div class="modal-field"><label>Beneficiary Name</label><input type="text" placeholder="Full legal name"></div>
+    <div class="modal-field"><label>Bank / SWIFT Code</label><input type="text" placeholder="SWIFT/BIC code"></div>
+    <div class="modal-field"><label>Account / IBAN</label><input type="text" placeholder="Account or IBAN number"></div>
+    <div class="modal-field"><label>Amount (USD)</label><input type="number" placeholder="$0.00"></div>
+    <div class="modal-field"><label>Currency</label>
+      <select><option>USD</option><option>EUR</option><option>GBP</option><option>JPY</option><option>CHF</option></select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-secondary" onclick="closeModal('wireModal')">Cancel</button>
+      <button class="btn-sm btn-primary" onclick="simulateWire()">Send Wire →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Bill Payment Modal -->
+<div class="modal-overlay" id="billModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">🧾 Pay a Bill</div>
+      <button class="modal-close" onclick="closeModal('billModal')">✕</button>
+    </div>
+    <div class="modal-field"><label>Payee Name</label><input type="text" placeholder="Company or person name"></div>
+    <div class="modal-field"><label>Account Number</label><input type="text" placeholder="Payee account number"></div>
+    <div class="modal-field"><label>Amount</label><input type="number" placeholder="$0.00"></div>
+    <div class="modal-field"><label>Payment Date</label><input type="date"></div>
+    <div class="modal-field"><label>Frequency</label>
+      <select><option>One Time</option><option>Weekly</option><option>Monthly</option><option>Annually</option></select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-secondary" onclick="closeModal('billModal')">Cancel</button>
+      <button class="btn-sm btn-primary" onclick="simulateBillPay()">Schedule Payment →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Deposit Modal -->
+<div class="modal-overlay" id="depositModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">⬇ Mobile Deposit</div>
+      <button class="modal-close" onclick="closeModal('depositModal')">✕</button>
+    </div>
+    <div style="border:2px dashed rgba(201,168,76,0.3);border-radius:12px;padding:40px;text-align:center;margin-bottom:20px;cursor:pointer;" onclick="showToast('info','Check capture: demo mode - no camera access required')">
+      <div style="font-size:40px;margin-bottom:10px;">📷</div>
+      <div style="font-size:14px;font-weight:600;">Click to Capture Check</div>
+      <div style="font-size:12px;color:var(--gray-400);margin-top:4px;">Front & back required</div>
+    </div>
+    <div class="modal-field"><label>Amount on Check</label><input type="number" placeholder="$0.00"></div>
+    <div class="modal-field"><label>Deposit to Account</label>
+      <select><option>Premier Checking ****8847</option><option>High-Yield Savings ****3291</option></select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-secondary" onclick="closeModal('depositModal')">Cancel</button>
+      <button class="btn-sm btn-primary" onclick="simulateDeposit()">Deposit Check →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card Payment Modal -->
+<div class="modal-overlay" id="cardPayModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">💳 Credit Card Payment</div>
+      <button class="modal-close" onclick="closeModal('cardPayModal')">✕</button>
+    </div>
+    <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:14px;margin-bottom:20px;font-size:13px;">
+      <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray-400)">Current Balance</span><span style="color:var(--red);font-weight:700;">$160,000.00</span></div>
+      <div style="display:flex;justify-content:space-between;margin-top:6px;"><span style="color:var(--gray-400)">Minimum Payment</span><span style="font-weight:700;">$4,500.00</span></div>
+    </div>
+    <div class="modal-field"><label>Payment Amount</label>
+      <select onchange="if(this.value==='custom')document.getElementById('customPay').style.display='block';else document.getElementById('customPay').style.display='none'">
+        <option value="min">Minimum Payment — $4,500</option>
+        <option value="full">Full Balance — $160,000</option>
+        <option value="stmt">Statement Balance — $160,000</option>
+        <option value="custom">Custom Amount</option>
+      </select>
+    </div>
+    <div class="modal-field" id="customPay" style="display:none;"><label>Custom Amount</label><input type="number" placeholder="$0.00"></div>
+    <div class="modal-field"><label>Pay From</label>
+      <select><option>Premier Checking ****8847 — $12,654,567.88</option></select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-secondary" onclick="closeModal('cardPayModal')">Cancel</button>
+      <button class="btn-sm btn-primary" onclick="simulateCardPayment()">Make Payment →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card Controls Modal -->
+<div class="modal-overlay" id="cardControlModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">⚙ Card Controls</div>
+      <button class="modal-close" onclick="closeModal('cardControlModal')">✕</button>
+    </div>
+    <p style="color:var(--gray-400);font-size:13px;margin-bottom:16px;">Manage your Olvex Platinum Elite Visa ****4821</p>
+    <div class="modal-field"><label>Set Daily Spending Limit</label><input type="number" placeholder="$0 = No limit" value="50000"></div>
+    <div class="modal-field"><label>ATM Daily Withdrawal Limit</label><input type="number" value="10000"></div>
+    <div style="margin-bottom:16px;">
+      <label style="display:block;font-size:12px;font-weight:600;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;">Travel Regions</label>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px;">
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;"><input type="checkbox" style="accent-color:var(--gold);" checked> North America</label>
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;"><input type="checkbox" style="accent-color:var(--gold);" checked> Europe</label>
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;"><input type="checkbox" style="accent-color:var(--gold);"> Asia Pacific</label>
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;"><input type="checkbox" style="accent-color:var(--gold);" checked> Middle East</label>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-secondary" onclick="closeModal('cardControlModal')">Cancel</button>
+      <button class="btn-sm btn-primary" onclick="showToast('success','Card controls updated successfully');closeModal('cardControlModal')">Save Settings →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Trade Modal -->
+<div class="modal-overlay" id="tradeModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">📈 Place Trade</div>
+      <button class="modal-close" onclick="closeModal('tradeModal')">✕</button>
+    </div>
+    <div class="modal-field"><label>Order Type</label>
+      <select><option>Market Order</option><option>Limit Order</option><option>Stop Loss</option><option>Stop Limit</option></select>
+    </div>
+    <div class="modal-field"><label>Symbol / Ticker</label><input type="text" placeholder="e.g. AAPL, MSFT, SPY"></div>
+    <div class="modal-field"><label>Action</label>
+      <select><option>Buy</option><option>Sell</option><option>Buy to Cover</option><option>Sell Short</option></select>
+    </div>
+    <div class="modal-field"><label>Quantity (Shares)</label><input type="number" placeholder="0" min="1"></div>
+    <div class="modal-field"><label>Time in Force</label>
+      <select><option>Day Only</option><option>Good Till Cancelled</option><option>Immediate or Cancel</option></select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-secondary" onclick="closeModal('tradeModal')">Cancel</button>
+      <button class="btn-sm btn-primary" onclick="simulateTrade()">Preview Order →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Invest Modal -->
+<div class="modal-overlay" id="investModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">+ Add Investment</div>
+      <button class="modal-close" onclick="closeModal('investModal')">✕</button>
+    </div>
+    <div class="modal-field"><label>Investment Type</label>
+      <select><option>Stocks & ETFs</option><option>Bonds</option><option>Real Estate (REITs)</option><option>Alternative Investments</option><option>Crypto Assets</option></select>
+    </div>
+    <div class="modal-field"><label>Amount to Invest</label><input type="number" placeholder="$0.00"></div>
+    <div class="modal-field"><label>Investment Strategy</label>
+      <select><option>Growth</option><option>Balanced</option><option>Conservative</option><option>Aggressive Growth</option></select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-secondary" onclick="closeModal('investModal')">Cancel</button>
+      <button class="btn-sm btn-primary" onclick="showToast('success','Investment order submitted for processing');closeModal('investModal')">Invest →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Loan Apply Modal -->
+<div class="modal-overlay" id="loanApplyModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">🏦 Loan Application</div>
+      <button class="modal-close" onclick="closeModal('loanApplyModal')">✕</button>
+    </div>
+    <div class="modal-field"><label>Loan Type</label>
+      <select><option>Personal Loan</option><option>Home Equity Loan</option><option>Auto Loan</option><option>Business Loan</option></select>
+    </div>
+    <div class="modal-field"><label>Loan Amount</label><input type="number" placeholder="$0.00"></div>
+    <div class="modal-field"><label>Loan Term</label>
+      <select><option>12 months</option><option>24 months</option><option>36 months</option><option>60 months</option><option>84 months</option></select>
+    </div>
+    <div class="modal-field"><label>Purpose</label>
+      <select><option>Home Improvement</option><option>Debt Consolidation</option><option>Vehicle Purchase</option><option>Business Expansion</option><option>Other</option></select>
+    </div>
+    <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:10px;padding:14px;margin-bottom:16px;font-size:13px;">
+      <div style="font-weight:700;color:var(--green);margin-bottom:4px;">✓ Pre-Approved</div>
+      <div style="color:var(--gray-400);">Based on your credit score of 845, you're pre-approved for up to $500,000 at 5.9% APR.</div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-secondary" onclick="closeModal('loanApplyModal')">Cancel</button>
+      <button class="btn-sm btn-primary" onclick="showToast('success','Loan application submitted! Decision within 24 hours.');closeModal('loanApplyModal')">Submit Application →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Mortgage Modal -->
+<div class="modal-overlay" id="mortgageModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">🏡 Mortgage Application</div>
+      <button class="modal-close" onclick="closeModal('mortgageModal')">✕</button>
+    </div>
+    <div class="modal-field"><label>Application Type</label>
+      <select><option>Refinance Existing Mortgage</option><option>New Home Purchase</option><option>Home Equity Line of Credit (HELOC)</option></select>
+    </div>
+    <div class="modal-field"><label>Property Address</label><input type="text" placeholder="Property address" value="740 Park Ave, New York, NY 10021"></div>
+    <div class="modal-field"><label>Loan Amount</label><input type="number" placeholder="$0.00" value="3142800"></div>
+    <div class="modal-field"><label>Desired Rate Type</label>
+      <select><option>30-Year Fixed</option><option>15-Year Fixed</option><option>5/1 ARM</option><option>7/1 ARM</option></select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-secondary" onclick="closeModal('mortgageModal')">Cancel</button>
+      <button class="btn-sm btn-primary" onclick="showToast('success','Mortgage application submitted! Your advisor will contact you within 2 business days.');closeModal('mortgageModal')">Submit →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Redeem Modal -->
+<div class="modal-overlay" id="redeemModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">⭐ Redeem Points</div>
+      <button class="modal-close" onclick="closeModal('redeemModal')">✕</button>
+    </div>
+    <div style="text-align:center;margin-bottom:20px;padding:16px;background:rgba(201,168,76,0.08);border-radius:12px;">
+      <div style="font-size:28px;font-weight:900;color:var(--gold);">2,850,000 pts</div>
+      <div style="color:var(--gray-400);font-size:12px;">≈ $28,500 redeemable value</div>
+    </div>
+    <div class="modal-field"><label>Redemption Type</label>
+      <select>
+        <option>Statement Credit ($10,000 min — 1pt = $0.01)</option>
+        <option>Travel Booking (1.5X value)</option>
+        <option>Cash Deposit to Account</option>
+        <option>Gift Cards (2X value)</option>
+        <option>Charitable Donation</option>
+      </select>
+    </div>
+    <div class="modal-field"><label>Points to Redeem</label><input type="number" placeholder="0" max="2850000"></div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-secondary" onclick="closeModal('redeemModal')">Cancel</button>
+      <button class="btn-sm btn-primary" onclick="showToast('success','Points redeemed successfully!');closeModal('redeemModal')">Redeem →</button>
+    </div>
+  </div>
+</div>
+
+<!-- New Account Modal -->
+<div class="modal-overlay" id="newAccountModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">+ Open New Account</div>
+      <button class="modal-close" onclick="closeModal('newAccountModal')">✕</button>
+    </div>
+    <div class="modal-field"><label>Account Type</label>
+      <select>
+        <option>High-Yield Money Market</option>
+        <option>Certificate of Deposit (CD)</option>
+        <option>Trust Account</option>
+        <option>Joint Savings Account</option>
+        <option>Custodial Account (UTMA)</option>
+      </select>
+    </div>
+    <div class="modal-field"><label>Initial Deposit</label><input type="number" placeholder="$0.00"></div>
+    <div class="modal-field"><label>Fund From</label>
+      <select><option>Premier Checking ****8847</option><option>High-Yield Savings ****3291</option></select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-secondary" onclick="closeModal('newAccountModal')">Cancel</button>
+      <button class="btn-sm btn-primary" onclick="showToast('success','New account application submitted!');closeModal('newAccountModal')">Open Account →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Compose Message Modal -->
+<div class="modal-overlay" id="composeModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">✉ Compose Secure Message</div>
+      <button class="modal-close" onclick="closeModal('composeModal')">✕</button>
+    </div>
+    <div class="modal-field"><label>To</label>
+      <select><option>Private Banking Team</option><option>Customer Support</option><option>Investment Advisor</option><option>Mortgage Specialist</option></select>
+    </div>
+    <div class="modal-field"><label>Subject</label><input type="text" placeholder="Message subject"></div>
+    <div class="modal-field"><label>Message</label><textarea placeholder="Type your secure message here..."></textarea></div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-secondary" onclick="closeModal('composeModal')">Cancel</button>
+      <button class="btn-sm btn-primary" onclick="showToast('success','Secure message sent!');closeModal('composeModal')">Send Securely →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Chat Support Modal -->
+<div class="modal-overlay" id="chatModal">
+  <div class="modal" style="max-width:440px;">
+    <div class="modal-header">
+      <div class="modal-title">💬 Live Chat Support</div>
+      <button class="modal-close" onclick="closeModal('chatModal')">✕</button>
+    </div>
+    <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:10px;padding:12px;margin-bottom:16px;font-size:13px;display:flex;align-items:center;gap:8px;">
+      <span class="dot" style="width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;display:inline-block;"></span>
+      <span>Sarah M. — Your Private Banker · Online</span>
+    </div>
+    <div style="height:200px;overflow-y:auto;background:rgba(255,255,255,0.02);border-radius:10px;padding:14px;margin-bottom:12px;display:flex;flex-direction:column;gap:10px;" id="chatMessages">
+      <div style="background:rgba(37,99,235,0.15);border-radius:10px 10px 10px 2px;padding:10px 14px;max-width:80%;font-size:13px;">
+        Good evening, Sandy! How may I assist you with your private banking needs today?
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;">
+      <input type="text" id="chatInput" placeholder="Type a message..." style="flex:1;padding:10px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:var(--white);font-size:13px;outline:none;font-family:'Inter',sans-serif;" onkeydown="if(event.key==='Enter')sendChatMessage()">
+      <button class="btn-sm btn-primary" onclick="sendChatMessage()">Send</button>
+    </div>
+  </div>
+</div>
+
+<!-- Call Modal -->
+<div class="modal-overlay" id="callModal">
+  <div class="modal" style="text-align:center;">
+    <div class="modal-header">
+      <div class="modal-title">📞 Call Support</div>
+      <button class="modal-close" onclick="closeModal('callModal')">✕</button>
+    </div>
+    <div style="font-size:48px;margin:20px 0;">📞</div>
+    <div style="font-size:24px;font-weight:800;color:var(--gold);margin-bottom:8px;">1-800-OLVEX-01</div>
+    <div style="color:var(--gray-400);font-size:13px;margin-bottom:20px;">Private Banking Priority Line</div>
+    <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;margin-bottom:20px;">
+      <div style="display:flex;justify-content:space-between;padding:10px;background:rgba(255,255,255,0.03);border-radius:8px;"><span style="color:var(--gray-400)">Hours</span><span>24/7 · 365 days</span></div>
+      <div style="display:flex;justify-content:space-between;padding:10px;background:rgba(255,255,255,0.03);border-radius:8px;"><span style="color:var(--gray-400)">Avg Wait Time</span><span style="color:var(--green)">~2 minutes</span></div>
+      <div style="display:flex;justify-content:space-between;padding:10px;background:rgba(255,255,255,0.03);border-radius:8px;"><span style="color:var(--gray-400)">Your Priority Level</span><span style="color:var(--gold)">Platinum Elite</span></div>
+    </div>
+    <button class="btn-sm btn-primary" style="width:100%;padding:14px;font-size:14px;" onclick="showToast('info','Initiating callback request...');closeModal('callModal')">Request Callback</button>
+  </div>
+</div>
+
+<!-- Appointment Modal -->
+<div class="modal-overlay" id="appointModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">📅 Book Appointment</div>
+      <button class="modal-close" onclick="closeModal('appointModal')">✕</button>
+    </div>
+    <div class="modal-field"><label>Meeting Type</label>
+      <select><option>Portfolio Review</option><option>Estate Planning</option><option>Tax Strategy</option><option>Mortgage Consultation</option><option>General Banking</option></select>
+    </div>
+    <div class="modal-field"><label>Preferred Date</label><input type="date"></div>
+    <div class="modal-field"><label>Preferred Time</label>
+      <select><option>9:00 AM</option><option>10:00 AM</option><option>11:00 AM</option><option>2:00 PM</option><option>3:00 PM</option><option>4:00 PM</option></select>
+    </div>
+    <div class="modal-field"><label>Location</label>
+      <select><option>Olvex Private Banking Center — 200 Park Ave, New York, NY</option><option>Video Conference (Secure Link)</option><option>Phone Call</option></select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-secondary" onclick="closeModal('appointModal')">Cancel</button>
+      <button class="btn-sm btn-primary" onclick="showToast('success','Appointment booked! Confirmation sent to sandy@olvexbank.demo');closeModal('appointModal')">Book Appointment →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Profile Modal -->
+<div class="modal-overlay" id="editProfileModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">✏ Edit Profile</div>
+      <button class="modal-close" onclick="closeModal('editProfileModal')">✕</button>
+    </div>
+    <div class="modal-field"><label>Full Name</label><input type="text" value="Sandy Harrison"></div>
+    <div class="modal-field"><label>Email</label><input type="email" value="sandy@olvexbank.demo"></div>
+    <div class="modal-field"><label>Phone</label><input type="tel" value="+1 (212) 555-8847"></div>
+    <div class="modal-field"><label>Address</label><textarea>740 Park Ave, New York, NY 10021</textarea></div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-secondary" onclick="closeModal('editProfileModal')">Cancel</button>
+      <button class="btn-sm btn-primary" onclick="showToast('success','Profile updated successfully');closeModal('editProfileModal')">Save Changes →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Change Password Modal -->
+<div class="modal-overlay" id="changePassModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">🔑 Change Password</div>
+      <button class="modal-close" onclick="closeModal('changePassModal')">✕</button>
+    </div>
+    <div class="modal-field"><label>Current Password</label><input type="password" placeholder="Enter current password"></div>
+    <div class="modal-field"><label>New Password</label><input type="password" placeholder="Enter new password"></div>
+    <div class="modal-field"><label>Confirm New Password</label><input type="password" placeholder="Confirm new password"></div>
+    <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:12px;font-size:12px;color:#fcd34d;margin-bottom:16px;">
+      ⚠ For security, you will be logged out of all other devices after changing your password.
+    </div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-secondary" onclick="closeModal('changePassModal')">Cancel</button>
+      <button class="btn-sm btn-primary" onclick="showToast('success','Password changed successfully!');closeModal('changePassModal')">Update Password →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Revoke Devices Modal -->
+<div class="modal-overlay" id="revokeDevicesModal">
+  <div class="modal" style="text-align:center;">
+    <div class="modal-header">
+      <div class="modal-title">🚨 Revoke All Sessions</div>
+      <button class="modal-close" onclick="closeModal('revokeDevicesModal')">✕</button>
+    </div>
+    <div style="font-size:40px;margin:16px 0;">⚠</div>
+    <div style="color:var(--gray-400);font-size:13px;margin-bottom:20px;">This will immediately sign out all other devices and sessions. You will remain logged in on this device only.</div>
+    <div class="modal-actions" style="justify-content:center;">
+      <button class="btn-sm btn-secondary" onclick="closeModal('revokeDevicesModal')">Cancel</button>
+      <button class="btn-sm btn-danger" onclick="showToast('warning','All other sessions revoked. 3 devices signed out.');closeModal('revokeDevicesModal')">🚨 Revoke All →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Close Account Modal -->
+<div class="modal-overlay" id="closeAccountModal">
+  <div class="modal" style="text-align:center;">
+    <div class="modal-header">
+      <div class="modal-title">⚠ Close Account</div>
+      <button class="modal-close" onclick="closeModal('closeAccountModal')">✕</button>
+    </div>
+    <div style="font-size:40px;margin:16px 0;">😢</div>
+    <div style="color:var(--gray-400);font-size:13px;margin-bottom:16px;">We're sorry to see you go. To close your account, please contact your dedicated private banker. All outstanding balances must be settled first.</div>
+    <div class="modal-actions" style="justify-content:center;">
+      <button class="btn-sm btn-secondary" onclick="closeModal('closeAccountModal')">Keep My Account</button>
+      <button class="btn-sm btn-danger" onclick="showToast('info','Account closure request submitted. Your banker will call within 24 hours.');closeModal('closeAccountModal')">Submit Request</button>
+    </div>
+  </div>
+</div>
+
+<!-- Filter Modal -->
+<div class="modal-overlay" id="filterModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">⚙ Filter Transactions</div>
+      <button class="modal-close" onclick="closeModal('filterModal')">✕</button>
+    </div>
+    <div class="modal-field"><label>Date Range</label>
+      <select><option>Last 7 days</option><option>Last 30 days</option><option>Last 3 months</option><option>Last 6 months</option><option>This year</option><option>Custom range</option></select>
+    </div>
+    <div class="modal-field"><label>Amount Range</label>
+      <div style="display:flex;gap:8px;">
+        <input type="number" placeholder="Min $">
+        <input type="number" placeholder="Max $">
+      </div>
+    </div>
+    <div class="modal-field"><label>Transaction Type</label>
+      <select><option>All</option><option>Deposits</option><option>Withdrawals</option><option>Transfers</option><option>Payments</option></select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-secondary" onclick="closeModal('filterModal')">Reset</button>
+      <button class="btn-sm btn-primary" onclick="showToast('success','Filters applied');closeModal('filterModal')">Apply Filters →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================
+     JAVASCRIPT
+     ============================================ -->
+<script>
+// ============================================
+// DATA
+// ============================================
+const TRANSACTIONS = [
+  {id:'TX001',type:'Deposit',icon:'deposit',desc:'Investment Dividend — Olvex Growth Fund',date:'Jun 6, 2026',time:'2:30 PM',amount:'+$85,000.00',status:'completed',account:'Investment ****7102'},
+  {id:'TX002',type:'Transfer',icon:'transfer',desc:'International Wire — Zurich Private Bank',date:'Jun 5, 2026',time:'11:15 AM',amount:'-$25,000.00',status:'completed',account:'Checking ****8847'},
+  {id:'TX003',type:'Payment',icon:'payment',desc:'Credit Card Payment — Olvex Platinum Visa',date:'Jun 4, 2026',time:'9:00 AM',amount:'-$10,000.00',status:'completed',account:'Checking ****8847'},
+  {id:'TX004',type:'Deposit',icon:'deposit',desc:'Dividend — Apple Inc (AAPL)',date:'Jun 3, 2026',time:'4:45 PM',amount:'+$12,500.00',status:'completed',account:'Investment ****7102'},
+  {id:'TX005',type:'Transfer',icon:'transfer',desc:'Transfer to High-Yield Savings',date:'Jun 2, 2026',time:'10:00 AM',amount:'-$50,000.00',status:'completed',account:'Checking ****8847'},
+  {id:'TX006',type:'Payment',icon:'payment',desc:'Con Edison — Electric Bill',date:'Jun 1, 2026',time:'8:00 AM',amount:'-$850.00',status:'completed',account:'Checking ****8847'},
+  {id:'TX007',type:'Deposit',icon:'reward',desc:'Cashback Reward Credit',date:'Jun 1, 2026',time:'12:00 AM',amount:'+$12,500.00',status:'completed',account:'Checking ****8847'},
+  {id:'TX008',type:'Deposit',icon:'deposit',desc:'ACH Deposit — Business Revenue',date:'May 31, 2026',time:'3:30 PM',amount:'+$125,000.00',status:'completed',account:'Checking ****8847'},
+  {id:'TX009',type:'Transfer',icon:'transfer',desc:'Wire Transfer — Singapore Holdings',date:'May 30, 2026',time:'2:00 PM',amount:'-$75,000.00',status:'completed',account:'Checking ****8847'},
+  {id:'TX010',type:'Payment',icon:'payment',desc:'Property Tax — NYC DOF',date:'May 29, 2026',time:'9:30 AM',amount:'-$45,000.00',status:'completed',account:'Checking ****8847'},
+  {id:'TX011',type:'Deposit',icon:'deposit',desc:'Interest — High Yield Savings (APY 5.25%)',date:'May 28, 2026',time:'12:00 AM',amount:'+$18,594.00',status:'completed',account:'Savings ****3291'},
+  {id:'TX012',type:'Payment',icon:'credit',desc:'Verizon — Business Account',date:'May 27, 2026',time:'11:00 AM',amount:'-$2,400.00',status:'completed',account:'Checking ****8847'},
+  {id:'TX013',type:'Transfer',icon:'transfer',desc:'Internal Transfer — Savings to Checking',date:'May 26, 2026',time:'10:15 AM',amount:'+$100,000.00',status:'completed',account:'Savings ****3291'},
+  {id:'TX014',type:'Deposit',icon:'deposit',desc:'Stock Sale — Microsoft Corp (MSFT)',date:'May 25, 2026',time:'1:45 PM',amount:'+$280,000.00',status:'completed',account:'Investment ****7102'},
+  {id:'TX015',type:'Payment',icon:'payment',desc:'Mortgage Payment — Primary Residence',date:'May 24, 2026',time:'8:00 AM',amount:'-$19,270.00',status:'completed',account:'Checking ****8847'},
+];
+
+const NOTIFICATIONS = [
+  {id:1,icon:'💰',title:'Dividend Received',desc:'$85,000 investment dividend credited to your account',time:'2 hours ago',read:false,type:'success'},
+  {id:2,icon:'🔔',title:'Wire Transfer Confirmed',desc:'International wire of $25,000 to Zurich has been processed',time:'1 day ago',read:false,type:'info'},
+  {id:3,icon:'⭐',title:'Reward Milestone',desc:'You reached 2,850,000 Olvex Elite Points! Redeem now.',time:'2 days ago',read:false,type:'gold'},
+  {id:4,icon:'📈',title:'Portfolio Update',desc:'Your investment portfolio gained +$210,750 today',time:'3 days ago',read:true,type:'success'},
+  {id:5,icon:'🔐',title:'Security Alert',desc:'New device added: MacBook Pro — New York, NY',time:'5 days ago',read:true,type:'warning'},
+];
+
+const HOLDINGS = [
+  {symbol:'AAPL',name:'Apple Inc.',shares:'2,400',price:'$192.50',value:'$462,000',gain:'+$84,500',pct:'+22.4%',up:true},
+  {symbol:'MSFT',name:'Microsoft Corp.',shares:'1,800',price:'$410.00',value:'$738,000',gain:'+$158,000',pct:'+27.2%',up:true},
+  {symbol:'NVDA',name:'NVIDIA Corp.',shares:'500',price:'$875.00',value:'$437,500',gain:'+$287,500',pct:'+192%',up:true},
+  {symbol:'SPY',name:'SPDR S&P 500 ETF',shares:'5,000',price:'$545.00',value:'$2,725,000',gain:'+$385,000',pct:'+16.5%',up:true},
+  {symbol:'BRK.B',name:'Berkshire Hathaway',shares:'8,000',price:'$385.00',value:'$3,080,000',gain:'+$480,000',pct:'+18.5%',up:true},
+  {symbol:'AMZN',name:'Amazon.com Inc.',shares:'900',price:'$185.00',value:'$166,500',gain:'-$12,000',pct:'-6.7%',up:false},
+  {symbol:'GLD',name:'SPDR Gold Trust ETF',shares:'800',price:'$215.00',value:'$172,000',gain:'+$28,000',pct:'+19.4%',up:true},
+];
+
+const MESSAGES = [
+  {from:'Private Banking Team',subject:'Q2 Portfolio Performance Report',preview:'Dear Ms. Harrison, please find attached your comprehensive Q2 portfolio...',time:'Today, 4:30 PM',read:false},
+  {from:'Investment Advisory',subject:'Market Opportunity Alert — Tech Sector',preview:'Our analysts have identified a significant opportunity in the technology...',time:'Yesterday, 2:00 PM',read:false},
+  {from:'Mortgage Specialist',subject:'Refinancing Rate Update — Action Required',preview:'Good news! Interest rates have dropped below 2.7%. We recommend...',time:'Jun 4, 2026',read:false},
+  {from:'Tax & Planning Department',subject:'2025 Tax Documents Ready',preview:'Your 2025 tax documents including 1099-INT, 1099-DIV are now available...',time:'Jun 2, 2026',read:true},
+  {from:'Customer Success',subject:'Welcome to Platinum Elite Tier',preview:'Congratulations on your continued loyalty! As a Platinum Elite member...',time:'May 28, 2026',read:true},
+];
+
+const DEVICES = [
+  {name:'MacBook Pro 16"',location:'New York, NY',time:'Current session',icon:'💻',current:true},
+  {name:'iPhone 16 Pro',location:'New York, NY',time:'2 hours ago',icon:'📱',current:false},
+  {name:'iPad Pro 12.9"',location:'New York, NY',time:'Yesterday, 8:30 PM',icon:'📱',current:false},
+];
+
+const STATEMENTS = [
+  {period:'May 2026',account:'Premier Checking ****8847',type:'Monthly Statement',status:'Ready'},
+  {period:'May 2026',account:'High-Yield Savings ****3291',type:'Monthly Statement',status:'Ready'},
+  {period:'Apr 2026',account:'Premier Checking ****8847',type:'Monthly Statement',status:'Ready'},
+  {period:'Apr 2026',account:'Investment Brokerage ****7102',type:'Quarterly Statement',status:'Ready'},
+  {period:'Mar 2026',account:'Premier Checking ****8847',type:'Monthly Statement',status:'Ready'},
+  {period:'Q1 2026',account:'All Accounts',type:'Quarterly Summary',status:'Ready'},
+];
+
+const UPCOMING_PAYMENTS = [
+  {name:'Mortgage Payment',date:'Jul 1, 2026',amount:'$19,270.00',icon:'🏡'},
+  {name:'Auto Loan',date:'Jul 1, 2026',amount:'$3,850.00',icon:'🚗'},
+  {name:'Credit Card Min.',date:'Jun 25, 2026',amount:'$4,500.00',icon:'💳'},
+  {name:'Property Tax',date:'Jul 15, 2026',amount:'$45,000.00',icon:'🏛'},
+];
+
+const FAQ = [
+  {q:'How do I enable Two-Factor Authentication?',a:'Go to Security Center and toggle on 2FA. You can use SMS or an authenticator app.'},
+  {q:'What are the wire transfer cutoff times?',a:'Domestic wires must be submitted by 5:00 PM EST. International wires by 4:00 PM EST.'},
+  {q:'How do I report a lost or stolen card?',a:'Call 1-800-OLVEX-01 immediately or freeze your card instantly via Card Controls.'},
+  {q:'When is my cashback reward credited?',a:'Cashback is credited on the 1st of each month to your primary checking account.'},
+];
+
+const WIRE_HISTORY = [
+  {to:'Zurich Private Bank AG',date:'Jun 5, 2026',amount:'-$25,000',status:'completed'},
+  {to:'HSBC Singapore Branch',date:'May 30, 2026',amount:'-$75,000',status:'completed'},
+  {to:'Deutsche Bank Frankfurt',date:'May 15, 2026',amount:'-$150,000',status:'completed'},
+];
+
+const BILL_PAYEES = [
+  {name:'Con Edison',type:'Electric & Gas',account:'****4892',amount:'$850/mo'},
+  {name:'Verizon Business',type:'Phone & Internet',account:'****7723',amount:'$2,400/mo'},
+  {name:'NYC Department of Finance',type:'Property Tax',account:'****0012',amount:'$45,000/qtr'},
+  {name:'American Express',type:'Credit Card',account:'****4821',amount:'$160,000 balance'},
+];
+
+const REDEEM_OPTIONS = [
+  {name:'Statement Credit',pts:'100,000 pts',val:'$1,000',icon:'💳'},
+  {name:'Business Class Flight',pts:'250,000 pts',val:'$3,750',icon:'✈'},
+  {name:'Luxury Hotel Stay',pts:'150,000 pts',val:'$2,250',icon:'🏨'},
+  {name:'Gift Cards',pts:'50,000 pts',val:'$1,000',icon:'🎁'},
+];
+
+const POINTS_HISTORY = [
+  {desc:'Monthly Cashback Bonus',pts:'+125,000',date:'Jun 1, 2026'},
+  {desc:'Wire Transfer Bonus',pts:'+2,500',date:'Jun 5, 2026'},
+  {desc:'Dining Spend (3X)',pts:'+15,000',date:'May 30, 2026'},
+  {desc:'Travel Booking (3X)',pts:'+45,000',date:'May 25, 2026'},
+];
+
+const TAX_DOCS = [
+  {name:'Form 1099-INT',desc:'Interest Income 2025',icon:'📄'},
+  {name:'Form 1099-DIV',desc:'Dividend & Distributions 2025',icon:'📄'},
+  {name:'Form 1099-B',desc:'Proceeds from Broker Transactions',icon:'📄'},
+  {name:'Schedule K-1',desc:'Partner Share of Income 2025',icon:'📄'},
+  {name:'Mortgage Interest Statement',desc:'Form 1098 — Primary Residence',icon:'📄'},
+];
+
+const RECENT_RECIPIENTS = [
+  {name:'Zurich Private Bank',type:'International Wire'},
+  {name:'Singapore Holdings Ltd',type:'International Wire'},
+  {name:'J. Harrison (Personal)',type:'Domestic Transfer'},
+];
+
+// ============================================
+// AUTH
+// ============================================
+const VALID_USERS = ['Sandy001','sandy@olvexbank.demo'];
+const VALID_PASS = '$sandy$9898';
+
+function handleLogin(){
+  const user = document.getElementById('loginUser').value.trim();
+  const pass = document.getElementById('loginPass').value;
+  const remember = document.getElementById('rememberMe').checked;
+  const btn = document.getElementById('loginBtn');
+  const err = document.getElementById('loginError');
+
+  if(!user || !pass){err.textContent='⚠ Please enter your username and password.';err.style.display='block';return;}
+
+  if(!VALID_USERS.includes(user) || pass !== VALID_PASS){
+    err.textContent='⚠ Invalid credentials. Try username: Sandy001 or email: sandy@olvexbank.demo with password: $sandy$9898';
+    err.style.display='block';
+    document.getElementById('loginPass').value='';
+    return;
+  }
+  err.style.display='none';
+  btn.textContent='🔐 Authenticating...';
+  btn.disabled=true;
+
+  if(remember)localStorage.setItem('olvex_session',JSON.stringify({user,ts:Date.now()}));
+
+  setTimeout(showLoadingScreen, 400);
+}
+
+function handleBiometric(){
+  showToast('info','Biometric scan initiated (demo mode)...');
+  setTimeout(()=>{
+    document.getElementById('loginUser').value='Sandy001';
+    document.getElementById('loginPass').value='$sandy$9898';
+    setTimeout(()=>handleLogin(),300);
+  },1500);
+}
+
+function showLoadingScreen(){
+  document.getElementById('loginPage').style.display='none';
+  document.getElementById('loadingScreen').style.display='flex';
+  const bar = document.getElementById('loadingBar');
+  const txt = document.getElementById('loadingText');
+  const steps=['Verifying Identity...','Establishing Secure Connection...','Loading Account Data...','Applying 256-bit Encryption...','Initializing Dashboard...'];
+  let i=0,pct=0;
+  const iv=setInterval(()=>{
+    pct+=20;
+    bar.style.width=pct+'%';
+    txt.textContent=steps[i]||'Ready!';
+    i++;
+    if(pct>=100){clearInterval(iv);setTimeout(()=>{document.getElementById('loadingScreen').style.opacity='0';setTimeout(()=>{document.getElementById('loadingScreen').style.display='none';document.getElementById('dashboard').style.display='block';initDashboard();},500);},400);}
+  },350);
+}
+
+function togglePassword(){
+  const inp=document.getElementById('loginPass');
+  const btn=document.getElementById('eyeBtn');
+  if(inp.type==='password'){inp.type='text';btn.textContent='🙈';}
+  else{inp.type='password';btn.textContent='👁';}
+}
+
+function handleLogout(){
+  localStorage.removeItem('olvex_session');
+  showToast('info','You have been securely signed out.');
+  setTimeout(()=>{
+    document.getElementById('dashboard').style.display='none';
+    document.getElementById('loginPage').style.display='flex';
+    document.getElementById('loginUser').value='';
+    document.getElementById('loginPass').value='';
+    document.getElementById('loginBtn').textContent='🔐 Sign In Securely';
+    document.getElementById('loginBtn').disabled=false;
+  },800);
+}
+
+// Check existing session
+window.addEventListener('load',()=>{
+  const sess=localStorage.getItem('olvex_session');
+  if(sess){
+    try{
+      const {ts}=JSON.parse(sess);
+      if(Date.now()-ts < 86400000){showLoadingScreen();return;}
+      else localStorage.removeItem('olvex_session');
+    }catch(e){localStorage.removeItem('olvex_session');}
+  }
+  // Allow Enter key
+  document.getElementById('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter')handleLogin();});
+  document.getElementById('loginUser').addEventListener('keydown',e=>{if(e.key==='Enter')handleLogin();});
+  // Set today's date in date inputs
+  document.querySelectorAll('input[type=date]').forEach(el=>{el.valueAsDate=new Date();});
+});
+
+// ============================================
+// DASHBOARD INIT
+// ============================================
+function initDashboard(){
+  updateGreeting();
+  renderRecentTransactions();
+  renderFullTransactions();
+  renderUpcomingPayments();
+  renderSecurityAlerts();
+  renderLoginActivity();
+  renderNotifications();
+  renderHoldingsTable();
+  renderMessages();
+  renderDeviceList();
+  renderLoginHistory();
+  renderStatements();
+  renderBillPayees();
+  renderWireHistory();
+  renderRecentRecipients();
+  renderRedeemOptions();
+  renderPointsHistory();
+  renderTaxDocs();
+  renderFAQ();
+  initCharts();
+  startSessionTimer();
+  // Show session restored toast
+  setTimeout(()=>showToast('success','Welcome back, Sandy! Secure session established.'),800);
+}
+
+function updateGreeting(){
+  const h=new Date().getHours();
+  const g=h<12?'Good Morning':h<17?'Good Afternoon':'Good Evening';
+  document.getElementById('topbarTitle').textContent=g+', Sandy 👋';
+}
+
+// ============================================
+// RENDERING
+// ============================================
+function renderRecentTransactions(){
+  const el=document.getElementById('recentTxList');
+  el.innerHTML=TRANSACTIONS.slice(0,6).map(tx=>txItem(tx)).join('');
+}
+
+function txItem(tx){
+  const pos=tx.amount.startsWith('+');
+  return `<div class="tx-item" onclick="showTxDetail('${tx.id}')">
+    <div class="tx-icon ${tx.icon}">${txIconEmoji(tx.icon)}</div>
+    <div class="tx-info">
+      <div class="tx-name">${tx.desc}</div>
+      <div class="tx-date">${tx.date} · ${tx.time} · ${tx.account}</div>
+    </div>
+    <div>
+      <div class="tx-amount ${pos?'pos':'neg'}">${tx.amount}</div>
+      <div style="text-align:right;margin-top:4px;"><span class="tx-status ${tx.status}">${tx.status}</span></div>
+    </div>
+  </div>`;
+}
+
+function txIconEmoji(icon){
+  return {deposit:'⬇',transfer:'↔',payment:'💳',credit:'⭐',reward:'🏆'}[icon]||'💰';
+}
+
+function renderFullTransactions(){
+  const el=document.getElementById('fullTxList');
+  el.innerHTML=TRANSACTIONS.map(tx=>txItem(tx)).join('');
+}
+
+function filterTransactions(){
+  const search=document.getElementById('txSearch').value.toLowerCase();
+  const type=document.getElementById('txTypeFilter').value;
+  const filtered=TRANSACTIONS.filter(tx=>{
+    const matchSearch=tx.desc.toLowerCase().includes(search)||tx.amount.includes(search)||tx.date.toLowerCase().includes(search);
+    const matchType=!type||tx.type===type;
+    return matchSearch&&matchType;
+  });
+  document.getElementById('fullTxList').innerHTML=filtered.length?filtered.map(tx=>txItem(tx)).join(''):'<div style="text-align:center;padding:40px;color:var(--gray-500);">No transactions found.</div>';
+}
+
+function showTxDetail(id){
+  const tx=TRANSACTIONS.find(t=>t.id===id);
+  if(!tx)return;
+  showToast('info',`Transaction ${tx.id}: ${tx.desc} — ${tx.amount}`);
+}
+
+function renderUpcomingPayments(){
+  const el=document.getElementById('upcomingPayments');
+  el.innerHTML=UPCOMING_PAYMENTS.map(p=>`
+    <div class="tx-item" style="cursor:default;">
+      <div class="tx-icon payment">${p.icon}</div>
+      <div class="tx-info"><div class="tx-name">${p.name}</div><div class="tx-date">${p.date}</div></div>
+      <div class="tx-amount neg">${p.amount}</div>
+    </div>`).join('');
+}
+
+function renderSecurityAlerts(){
+  const el=document.getElementById('securityAlerts');
+  el.innerHTML=`
+    <div class="security-item">
+      <div class="sec-icon green">✅</div>
+      <div class="sec-info"><div class="sec-title">2FA Active</div><div class="sec-desc">All login attempts verified</div></div>
+    </div>
+    <div class="security-item" style="border:none;">
+      <div class="sec-icon blue">🔍</div>
+      <div class="sec-info"><div class="sec-title">Fraud Scan Complete</div><div class="sec-desc">No suspicious transactions found</div></div>
+    </div>`;
+}
+
+function renderLoginActivity(){
+  const el=document.getElementById('loginActivity');
+  el.innerHTML=[
+    {loc:'New York, NY',device:'MacBook Pro 16"',time:'Today, 6:28 PM',status:'current'},
+    {loc:'New York, NY',device:'iPhone 16 Pro',time:'Today, 2:15 PM',status:'ok'},
+    {loc:'New York, NY',device:'iPad Pro',time:'Yesterday, 8:30 PM',status:'ok'},
+  ].map(l=>`
+    <div class="tx-item" style="cursor:default;">
+      <div class="tx-icon ${l.status==='current'?'deposit':'transfer'}">${l.status==='current'?'✅':'📍'}</div>
+      <div class="tx-info">
+        <div class="tx-name">${l.device} · ${l.loc}</div>
+        <div class="tx-date">${l.time}</div>
+      </div>
+      ${l.status==='current'?'<span class="tag tag-green">Current</span>':''}
+    </div>`).join('');
+}
+
+function renderNotifications(){
+  const el=document.getElementById('notifList');
+  el.innerHTML=NOTIFICATIONS.map(n=>`
+    <div style="display:flex;gap:12px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
+      <div style="font-size:22px;min-width:30px;">${n.icon}</div>
+      <div style="flex:1;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div style="font-size:13.5px;font-weight:${n.read?'500':'700'};">${n.title}${!n.read?'<span class="notif-dot"></span>':''}</div>
+          <div style="font-size:11px;color:var(--gray-500);white-space:nowrap;margin-left:8px;">${n.time}</div>
+        </div>
+        <div style="font-size:12px;color:var(--gray-400);margin-top:4px;">${n.desc}</div>
+      </div>
+    </div>`).join('');
+}
+
+function markAllRead(){NOTIFICATIONS.forEach(n=>n.read=true);showToast('success','All notifications marked as read');}
+
+function renderHoldingsTable(){
+  const el=document.getElementById('holdingsTable');
+  el.innerHTML=HOLDINGS.map(h=>`
+    <tr>
+      <td><span style="font-weight:800;color:var(--gold);">${h.symbol}</span></td>
+      <td>${h.name}</td>
+      <td>${h.shares}</td>
+      <td>${h.price}</td>
+      <td style="font-weight:700;">${h.value}</td>
+      <td class="${h.up?'text-green':'text-red'}" style="font-weight:700;">${h.gain} (${h.pct})</td>
+      <td>
+        <button class="btn-sm btn-sm btn-primary" style="margin-right:4px;padding:5px 10px;font-size:11px;" onclick="openModal('tradeModal')">Buy</button>
+        <button class="btn-sm btn-danger" style="padding:5px 10px;font-size:11px;" onclick="openModal('tradeModal')">Sell</button>
+      </td>
+    </tr>`).join('');
+}
+
+function renderMessages(){
+  const el=document.getElementById('messageList');
+  el.innerHTML=MESSAGES.map(m=>`
+    <div style="padding:14px;border-bottom:1px solid rgba(255,255,255,0.05);cursor:pointer;border-radius:8px;transition:background 0.2s;" onclick="this.style.background='rgba(201,168,76,0.06)';showToast('info','Opening secure message from ${m.from}');" onmouseout="this.style.background=''">
+      <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+        <div style="font-size:13px;font-weight:${m.read?'500':'700'};display:flex;align-items:center;gap:6px;">${m.from}${!m.read?'<span class="notif-dot" style="width:6px;height:6px;border-radius:50%;background:var(--gold);display:inline-block;"></span>':''}</div>
+        <div style="font-size:11px;color:var(--gray-500);">${m.time}</div>
+      </div>
+      <div style="font-size:13px;font-weight:600;margin-bottom:3px;">${m.subject}</div>
+      <div style="font-size:12px;color:var(--gray-500);">${m.preview}</div>
+    </div>`).join('');
+}
+
+function renderDeviceList(){
+  const el=document.getElementById('deviceList');
+  el.innerHTML=DEVICES.map(d=>`
+    <div class="security-item">
+      <div class="sec-icon ${d.current?'green':'blue'}">${d.icon}</div>
+      <div class="sec-info">
+        <div class="sec-title">${d.name}${d.current?' <span class="tag tag-green" style="font-size:10px;">Current</span>':''}</div>
+        <div class="sec-desc">${d.location} · ${d.time}</div>
+      </div>
+      ${!d.current?`<button class="btn-sm btn-danger" style="padding:5px 10px;font-size:11px;" onclick="showToast('warning','Session revoked for ${d.name}')">Revoke</button>`:''}
+    </div>`).join('');
+}
+
+function renderLoginHistory(){
+  const el=document.getElementById('loginHistoryFull');
+  if(!el)return;
+  el.innerHTML=[
+    {loc:'New York, NY',device:'MacBook Pro 16"',time:'Today, 6:28 PM',ip:'192.168.1.1',ok:true},
+    {loc:'New York, NY',device:'iPhone 16 Pro',time:'Today, 2:15 PM',ip:'192.168.1.2',ok:true},
+    {loc:'New York, NY',device:'iPad Pro',time:'Yesterday, 8:30 PM',ip:'192.168.1.3',ok:true},
+    {loc:'New York, NY',device:'MacBook Pro 16"',time:'Jun 4, 2026, 9:00 AM',ip:'192.168.1.1',ok:true},
+  ].map(l=>`
+    <div class="tx-item" style="cursor:default;">
+      <div class="tx-icon ${l.ok?'deposit':'payment'}">${l.ok?'✅':'⚠'}</div>
+      <div class="tx-info">
+        <div class="tx-name">${l.device} · ${l.loc}</div>
+        <div class="tx-date">${l.time} · IP: ${l.ip}</div>
+      </div>
+      <span class="tx-status ${l.ok?'completed':'failed'}">${l.ok?'Verified':'Failed'}</span>
+    </div>`).join('');
+}
+
+function renderStatements(){
+  const el=document.getElementById('statementsTable');
+  el.innerHTML=STATEMENTS.map(s=>`
+    <tr>
+      <td style="font-weight:600;">${s.period}</td>
+      <td>${s.account}</td>
+      <td>${s.type}</td>
+      <td><span class="tx-status completed">${s.status}</span></td>
+      <td>
+        <button class="btn-sm btn-secondary" style="padding:5px 10px;font-size:11px;margin-right:4px;" onclick="showToast('info','Viewing ${s.period} statement...')">View</button>
+        <button class="btn-sm btn-primary" style="padding:5px 10px;font-size:11px;" onclick="showToast('success','Downloading ${s.period} PDF...')">⬇ PDF</button>
+      </td>
+    </tr>`).join('');
+}
+
+function renderBillPayees(){
+  const el=document.getElementById('billPayees');
+  el.innerHTML=BILL_PAYEES.map(p=>`
+    <div class="tx-item">
+      <div class="tx-icon payment">🧾</div>
+      <div class="tx-info">
+        <div class="tx-name">${p.name}</div>
+        <div class="tx-date">${p.type} · Acct: ${p.account}</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:12px;font-weight:600;">${p.amount}</div>
+        <button class="btn-sm btn-primary" style="padding:4px 10px;font-size:11px;margin-top:4px;" onclick="showToast('success','Payment to ${p.name} scheduled!')">Pay Now</button>
+      </div>
+    </div>`).join('');
+}
+
+function renderWireHistory(){
+  const el=document.getElementById('wireHistory');
+  el.innerHTML=WIRE_HISTORY.map(w=>`
+    <div class="tx-item" style="cursor:default;">
+      <div class="tx-icon transfer">🌐</div>
+      <div class="tx-info"><div class="tx-name">${w.to}</div><div class="tx-date">${w.date}</div></div>
+      <div style="text-align:right;">
+        <div class="tx-amount neg">${w.amount}</div>
+        <span class="tx-status completed">${w.status}</span>
+      </div>
+    </div>`).join('');
+}
+
+function renderRecentRecipients(){
+  const el=document.getElementById('recentRecipients');
+  el.innerHTML=RECENT_RECIPIENTS.map(r=>`
+    <div class="tx-item" style="cursor:pointer;" onclick="showToast('info','Selected ${r.name} as recipient')">
+      <div class="tx-icon transfer">👤</div>
+      <div class="tx-info"><div class="tx-name">${r.name}</div><div class="tx-date">${r.type}</div></div>
+      <button class="btn-sm btn-secondary" style="padding:5px 10px;font-size:11px;">Select</button>
+    </div>`).join('');
+}
+
+function renderRedeemOptions(){
+  const el=document.getElementById('redeemOptions');
+  el.innerHTML=REDEEM_OPTIONS.map(r=>`
+    <div class="tx-item">
+      <div class="tx-icon reward">${r.icon}</div>
+      <div class="tx-info"><div class="tx-name">${r.name}</div><div class="tx-date">${r.pts}</div></div>
+      <div style="text-align:right;">
+        <div style="font-weight:700;color:var(--green);">${r.val}</div>
+        <button class="btn-sm btn-primary" style="padding:4px 10px;font-size:11px;margin-top:4px;" onclick="openModal('redeemModal')">Redeem</button>
+      </div>
+    </div>`).join('');
+}
+
+function renderPointsHistory(){
+  const el=document.getElementById('pointsHistory');
+  el.innerHTML=POINTS_HISTORY.map(p=>`
+    <div class="tx-item" style="cursor:default;">
+      <div class="tx-icon deposit">⭐</div>
+      <div class="tx-info"><div class="tx-name">${p.desc}</div><div class="tx-date">${p.date}</div></div>
+      <div class="tx-amount pos">${p.pts}</div>
+    </div>`).join('');
+}
+
+function renderTaxDocs(){
+  const el=document.getElementById('taxDocs');
+  el.innerHTML=TAX_DOCS.map(d=>`
+    <div class="tx-item">
+      <div class="tx-icon transfer">${d.icon}</div>
+      <div class="tx-info"><div class="tx-name">${d.name}</div><div class="tx-date">${d.desc}</div></div>
+      <div style="display:flex;gap:6px;">
+        <button class="btn-sm btn-secondary" style="padding:5px 10px;font-size:11px;" onclick="showToast('info','Viewing ${d.name}...')">View</button>
+        <button class="btn-sm btn-primary" style="padding:5px 10px;font-size:11px;" onclick="showToast('success','Downloading ${d.name}...')">⬇</button>
+      </div>
+    </div>`).join('');
+}
+
+function renderFAQ(){
+  const el=document.getElementById('faqList');
+  el.innerHTML=FAQ.map((f,i)=>`
+    <div style="border-bottom:1px solid rgba(255,255,255,0.05);">
+      <button onclick="toggleFAQ(${i})" style="width:100%;text-align:left;padding:14px 0;background:none;border:none;color:var(--white);font-size:13.5px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;display:flex;justify-content:space-between;align-items:center;">
+        ${f.q} <span id="faqIcon${i}" style="transition:transform 0.3s;font-size:12px;color:var(--gray-400);">▼</span>
+      </button>
+      <div id="faqAns${i}" style="display:none;padding:0 0 14px;font-size:13px;color:var(--gray-400);">${f.a}</div>
+    </div>`).join('');
+}
+
+function toggleFAQ(i){
+  const el=document.getElementById('faqAns'+i);
+  const ic=document.getElementById('faqIcon'+i);
+  if(el.style.display==='none'){el.style.display='block';ic.style.transform='rotate(180deg)';}
+  else{el.style.display='none';ic.style.transform='rotate(0deg)';}
+}
+
+// ============================================
+// CHARTS
+// ============================================
+const chartDefaults = {
+  color: 'rgba(255,255,255,0.7)',
+  plugins:{legend:{labels:{color:'rgba(255,255,255,0.7)',font:{family:'Inter',size:11}}}},
+  responsive:true,maintainAspectRatio:false,
+};
+
+function initCharts(){
+  // Cash Flow Chart
+  new Chart(document.getElementById('cashFlowChart'),{
+    type:'bar',
+    data:{
+      labels:['Jan','Feb','Mar','Apr','May','Jun'],
+      datasets:[
+        {label:'Income',data:[485000,520000,610000,540000,680000,745000],backgroundColor:'rgba(16,185,129,0.7)',borderRadius:4},
+        {label:'Expenses',data:[85000,92000,78000,105000,88000,96000],backgroundColor:'rgba(239,68,68,0.5)',borderRadius:4}
+      ]
+    },
+    options:{...chartDefaults,scales:{x:{ticks:{color:'rgba(255,255,255,0.5)',font:{family:'Inter',size:10}},grid:{display:false}},y:{ticks:{color:'rgba(255,255,255,0.5)',font:{family:'Inter',size:10},callback:v=>'$'+(v/1000)+'k'},grid:{color:'rgba(255,255,255,0.05)'}}}}
+  });
+
+  // Spending Chart
+  new Chart(document.getElementById('spendingChart'),{
+    type:'doughnut',
+    data:{
+      labels:['Housing','Investments','Travel','Dining','Healthcare','Other'],
+      datasets:[{data:[19270,85000,12500,8500,3500,6800],backgroundColor:['#c9a84c','#10b981','#2563eb','#8b5cf6','#f59e0b','#64748b'],borderWidth:0,hoverOffset:8}]
+    },
+    options:{...chartDefaults,cutout:'68%'}
+  });
+
+  // Asset Allocation Chart (accounts page)
+  const allocEl=document.getElementById('allocationChart');
+  if(allocEl){
+    new Chart(allocEl,{
+      type:'doughnut',
+      data:{
+        labels:['Checking','Savings','Investments'],
+        datasets:[{data:[12654567,4250000,8780000],backgroundColor:['#1e4db7','#c9a84c','#10b981'],borderWidth:0,hoverOffset:8}]
+      },
+      options:{...chartDefaults,cutout:'60%'}
+    });
+  }
+
+  // Investment Allocation
+  const invAllocEl=document.getElementById('investAllocChart');
+  if(invAllocEl){
+    new Chart(invAllocEl,{
+      type:'doughnut',
+      data:{
+        labels:['US Stocks','ETFs','International','Bonds','Alternatives'],
+        datasets:[{data:[35,30,15,12,8],backgroundColor:['#c9a84c','#2563eb','#10b981','#8b5cf6','#f59e0b'],borderWidth:0}]
+      },
+      options:{...chartDefaults,cutout:'62%',plugins:{legend:{position:'right',labels:{color:'rgba(255,255,255,0.7)',font:{family:'Inter',size:11}}}}}
+    });
+  }
+
+  // Investment Performance
+  const invPerfEl=document.getElementById('investPerfChart');
+  if(invPerfEl){
+    new Chart(invPerfEl,{
+      type:'line',
+      data:{
+        labels:['Jun\'25','Aug','Oct','Dec','Feb\'26','Apr','Jun'],
+        datasets:[
+          {label:'Portfolio',data:[7420000,7650000,7800000,8100000,8350000,8600000,8780000],borderColor:'#c9a84c',backgroundColor:'rgba(201,168,76,0.08)',borderWidth:2,fill:true,tension:0.4,pointRadius:3},
+          {label:'Benchmark',data:[7420000,7490000,7580000,7700000,7850000,7950000,8020000],borderColor:'rgba(37,99,235,0.6)',backgroundColor:'transparent',borderWidth:1.5,borderDash:[5,5],tension:0.4,pointRadius:0}
+        ]
+      },
+      options:{...chartDefaults,scales:{x:{ticks:{color:'rgba(255,255,255,0.5)',font:{family:'Inter',size:10}},grid:{display:false}},y:{ticks:{color:'rgba(255,255,255,0.5)',font:{family:'Inter',size:10},callback:v=>'$'+(v/1000000).toFixed(1)+'M'},grid:{color:'rgba(255,255,255,0.05)'}}}}
+    });
+  }
+
+  // Mortgage amortization
+  const mortEl=document.getElementById('mortgageChart');
+  if(mortEl){
+    new Chart(mortEl,{
+      type:'bar',
+      data:{
+        labels:['2024','2026','2028','2030','2035','2040','2048'],
+        datasets:[
+          {label:'Principal',data:[250000,480000,850000,1200000,2100000,2900000,4500000],backgroundColor:'rgba(201,168,76,0.7)',borderRadius:4},
+          {label:'Interest',data:[4250000,4020000,3650000,3300000,2400000,1600000,0],backgroundColor:'rgba(239,68,68,0.4)',borderRadius:4}
+        ]
+      },
+      options:{...chartDefaults,scales:{x:{ticks:{color:'rgba(255,255,255,0.4)',font:{family:'Inter',size:9}},grid:{display:false}},y:{ticks:{color:'rgba(255,255,255,0.4)',font:{family:'Inter',size:9},callback:v=>'$'+(v/1000)+'k'},grid:{color:'rgba(255,255,255,0.04)'}}},plugins:{legend:{labels:{font:{family:'Inter',size:10}}}}}
+    });
+  }
+}
+
+// ============================================
+// NAVIGATION
+// ============================================
+function showPage(page){
+  document.querySelectorAll('.dash-page').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
+  const pg=document.getElementById('page-'+page);
+  if(pg)pg.classList.add('active');
+  const nav=document.getElementById('nav-'+page);
+  if(nav)nav.classList.add('active');
+  const titles={
+    overview:'Dashboard Overview',accounts:'My Accounts',transactions:'Transaction History',
+    transfer:'Transfer Funds',wire:'Wire Transfers',bills:'Bill Payments',
+    cards:'Credit Cards',investments:'Investment Portfolio',loans:'Loans & Credit',
+    mortgage:'Mortgage Center',statements:'Account Statements',taxes:'Tax Documents',
+    rewards:'Rewards Program',security:'Security Center',messages:'Secure Messages',
+    support:'Customer Support',profile:'Profile Settings'
+  };
+  document.getElementById('topbarTitle').textContent=titles[page]||'Dashboard';
+  closeSidebar();
+  window.scrollTo({top:0,behavior:'smooth'});
+  // Re-init charts if needed
+  if(page==='investments'||page==='accounts'||page==='mortgage'){
+    setTimeout(initCharts,100);
+  }
+}
+
+// ============================================
+// MODALS
+// ============================================
+function openModal(id){
+  const el=document.getElementById(id);
+  if(el)el.classList.add('active');
+}
+function closeModal(id){
+  const el=document.getElementById(id);
+  if(el)el.classList.remove('active');
+}
+// Close on overlay click
+document.querySelectorAll('.modal-overlay').forEach(el=>{
+  el.addEventListener('click',e=>{if(e.target===el)el.classList.remove('active');});
+});
+
+// ============================================
+// SIMULATIONS
+// ============================================
+function simulateTransfer(){
+  closeModal('transferModal');
+  showToast('info','Processing transfer...');
+  setTimeout(()=>showToast('success','✓ Transfer completed successfully!'),1500);
+}
+function simulateWire(){
+  closeModal('wireModal');
+  showToast('info','Wire transfer submitted for processing...');
+  setTimeout(()=>showToast('success','✓ Wire transfer initiated. Processing 1-3 business days.'),2000);
+}
+function simulateBillPay(){
+  closeModal('billModal');
+  showToast('success','✓ Bill payment scheduled successfully!');
+}
+function simulateDeposit(){
+  closeModal('depositModal');
+  showToast('success','✓ Check deposited! Funds available by next business day.');
+}
+function simulateCardPayment(){
+  closeModal('cardPayModal');
+  showToast('success','✓ Credit card payment processed successfully!');
+}
+function simulateForgotPassword(){
+  closeModal('forgotModal');
+  showToast('success','Password reset link sent to sandy@olvexbank.demo');
+}
+function simulateTrade(){
+  closeModal('tradeModal');
+  showToast('info','Order preview generated. Confirm to execute trade.');
+}
+function simulateMortgagePayment(){
+  showToast('success','✓ Mortgage payment of $19,270.00 processed!');
+}
+function exportTransactions(){
+  showToast('success','Transaction export generated. Download starting...');
+}
+function toggleCardStatus(el){
+  showToast(el.checked?'success':'warning',el.checked?'✓ Card activated successfully':'⚠ Card deactivated. Contact us if this was unintended.');
+}
+
+// ============================================
+// TOAST
+// ============================================
+function showToast(type,msg,duration=4000){
+  const container=document.getElementById('toastContainer');
+  const toast=document.createElement('div');
+  const icons={success:'✓',error:'✕',info:'ℹ',warning:'⚠'};
+  toast.className=`toast ${type}`;
+  toast.innerHTML=`<span>${icons[type]||'ℹ'}</span><span>${msg}</span>`;
+  toast.onclick=()=>toast.remove();
+  container.appendChild(toast);
+  setTimeout(()=>{
+    toast.style.opacity='0';toast.style.transform='translateX(30px)';toast.style.transition='all 0.3s ease';
+    setTimeout(()=>toast.remove(),300);
+  },duration);
+}
+
+// ============================================
+// SIDEBAR TOGGLE
+// ============================================
+function toggleSidebar(){
+  const s=document.getElementById('sidebar');
+  const o=document.getElementById('sidebarOverlay');
+  s.classList.toggle('open');
+  o.classList.toggle('active');
+}
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('active');
+}
+
+// ============================================
+// THEME
+// ============================================
+let dark=true;
+function toggleTheme(){
+  dark=!dark;
+  document.documentElement.setAttribute('data-theme',dark?'dark':'light');
+  document.getElementById('themeBtn').textContent=dark?'🌙':'☀';
+  showToast('info',dark?'Dark mode enabled':'Light mode enabled');
+}
+
+// ============================================
+// CHAT
+// ============================================
+const chatReplies=[
+  'How can I help you with your private banking needs today?',
+  'Of course! I can assist you with that right away.',
+  'Let me check on that for you immediately.',
+  'Thank you for choosing Olvex Financial Bank. Is there anything else I can help you with?',
+  'I\'ve flagged this for our specialist team. You\'ll receive an update within 24 hours.',
+  'Your account is in excellent standing. No issues detected.',
+];
+let chatIdx=0;
+function sendChatMessage(){
+  const inp=document.getElementById('chatInput');
+  const msgs=document.getElementById('chatMessages');
+  const msg=inp.value.trim();
+  if(!msg)return;
+  msgs.innerHTML+=`<div style="background:rgba(201,168,76,0.15);border-radius:10px 10px 2px 10px;padding:10px 14px;max-width:80%;margin-left:auto;font-size:13px;">${msg}</div>`;
+  inp.value='';
+  msgs.scrollTop=msgs.scrollHeight;
+  setTimeout(()=>{
+    msgs.innerHTML+=`<div style="background:rgba(37,99,235,0.15);border-radius:10px 10px 10px 2px;padding:10px 14px;max-width:80%;font-size:13px;">${chatReplies[chatIdx%chatReplies.length]}</div>`;
+    chatIdx++;msgs.scrollTop=msgs.scrollHeight;
+  },800);
+}
+
+// ============================================
+// SESSION TIMER (15 min auto-logout)
+// ============================================
+let sessionTimer,sessionWarn=false;
+function resetSessionTimer(){
+  clearTimeout(sessionTimer);
+  sessionWarn=false;
+  sessionTimer=setTimeout(()=>{
+    if(!sessionWarn){
+      sessionWarn=true;
+      showToast('warning','⏱ Your session will expire in 2 minutes due to inactivity.',10000);
+      sessionTimer=setTimeout(()=>{showToast('error','Session expired. Logging out for security.');setTimeout(handleLogout,1500);},120000);
+    }
+  },780000); // 13 min
+}
+['click','keydown','mousemove','touchstart'].forEach(ev=>document.addEventListener(ev,resetSessionTimer));
+</script>
+</body>
+</html>
