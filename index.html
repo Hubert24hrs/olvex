@@ -1025,7 +1025,7 @@ canvas{max-width:100%;}
       <div class="sidebar-user">
         <div class="user-avatar">SH</div>
         <div class="user-info">
-          <div class="user-name">Sandy Harrison</div>
+          <div class="user-name">Sandra B</div>
           <div class="user-tier">✦ Platinum Elite</div>
         </div>
       </div>
@@ -1103,7 +1103,7 @@ canvas{max-width:100%;}
       <!-- TOPBAR -->
       <header class="topbar">
         <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
-        <div class="topbar-title" id="topbarTitle">Good Evening, Sandy 👋</div>
+        <div class="topbar-title" id="topbarTitle">Good Evening, Sandra 👋</div>
         <div class="topbar-actions">
           <button class="topbar-btn" onclick="toggleTheme()" id="themeBtn" title="Toggle Theme">🌙</button>
           <button class="topbar-btn" onclick="showPage('messages')" title="Messages">
@@ -1125,8 +1125,8 @@ canvas{max-width:100%;}
           <div class="alert-banner info" id="welcomeAlert">
             <span style="font-size:18px">✦</span>
             <div>
-              <strong>Welcome back, Sandy.</strong> Your portfolio grew by <strong style="color:var(--green)">+2.4%</strong> this month.
-              <span style="color:var(--gray-400)">Last login: Today, 6:15 PM EST from New York, NY</span>
+              <strong>Welcome back, Sandra.</strong> Your portfolio grew by <strong style="color:var(--green)">+2.4%</strong> this month.
+              <span style="color:var(--gray-400)">Last login: Today, 6:15 PM PST from Los Angeles, CA</span>
             </div>
             <button onclick="this.parentElement.remove()" style="background:none;border:none;color:var(--gray-400);cursor:pointer;font-size:16px;margin-left:auto;">✕</button>
           </div>
@@ -1135,8 +1135,8 @@ canvas{max-width:100%;}
           <div class="grid-4" style="margin-bottom:24px;">
             <div class="balance-card balance-card-1" onclick="showPage('accounts')">
               <div class="card-label">Checking Account</div>
-              <div class="card-amount">$12,654,567</div>
-              <div class="card-change">✦ Available Balance: $12,654,567.88</div>
+              <div class="card-amount" id="heroBalance">$12,654,567</div>
+              <div class="card-change">✦ Available Balance: <span id="heroBalanceFull">$12,654,567.88</span></div>
               <div class="card-icon">💳</div>
             </div>
             <div class="balance-card balance-card-2" onclick="showPage('accounts')">
@@ -1348,7 +1348,7 @@ canvas{max-width:100%;}
                   </div>
                 </div>
                 <div style="text-align:right;">
-                  <div style="font-size:26px;font-weight:900;color:var(--blue-bright);">$12,654,567.88</div>
+                  <div style="font-size:26px;font-weight:900;color:var(--blue-bright);" id="checkingBalanceDisplay">$12,654,567.88</div>
                   <div style="font-size:12px;color:var(--gray-400);">Available Balance</div>
                   <div style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end;">
                     <button class="btn-sm btn-secondary" onclick="openModal('transferModal')">Transfer</button>
@@ -1476,7 +1476,7 @@ canvas{max-width:100%;}
               </div>
               <div class="modal-field">
                 <label>Amount</label>
-                <input type="number" placeholder="$0.00" min="0">
+                <input type="number" id="transferAmtPage" placeholder="$0.00" min="0">
               </div>
               <div class="modal-field">
                 <label>Transfer Date</label>
@@ -1486,7 +1486,7 @@ canvas{max-width:100%;}
                 <label>Note (Optional)</label>
                 <input type="text" placeholder="Add a memo">
               </div>
-              <button class="btn-sm btn-primary" style="width:100%;padding:14px;font-size:14px;margin-top:8px;" onclick="simulateTransfer()">
+              <button class="btn-sm btn-primary" style="width:100%;padding:14px;font-size:14px;margin-top:8px;" onclick="simulateTransfer('page')">
                 ↗ Initiate Transfer
               </button>
             </div>
@@ -1517,7 +1517,7 @@ canvas{max-width:100%;}
           <div class="grid-2" style="align-items:start;">
             <div class="card">
               <div class="section-title" style="margin-bottom:20px;">Initiate Wire Transfer</div>
-              <div class="modal-field"><label>Beneficiary Name</label><input type="text" placeholder="Full legal name"></div>
+              <div class="modal-field"><label>Beneficiary Name</label><input type="text" id="wireToPage" placeholder="Full legal name"></div>
               <div class="modal-field"><label>Bank Name</label><input type="text" placeholder="Receiving bank name"></div>
               <div class="modal-field"><label>Account / IBAN Number</label><input type="text" placeholder="Account or IBAN number"></div>
               <div class="modal-field"><label>Routing / SWIFT / BIC</label><input type="text" placeholder="Routing or SWIFT code"></div>
@@ -1527,9 +1527,9 @@ canvas{max-width:100%;}
                   <option>France</option><option>Switzerland</option><option>Japan</option><option>Singapore</option>
                 </select>
               </div>
-              <div class="modal-field"><label>Amount (USD)</label><input type="number" placeholder="$0.00"></div>
+              <div class="modal-field"><label>Amount (USD)</label><input type="number" id="wireAmtPage" placeholder="$0.00"></div>
               <div class="modal-field"><label>Purpose / Reference</label><input type="text" placeholder="Payment reference"></div>
-              <button class="btn-sm btn-primary" style="width:100%;padding:14px;font-size:14px;margin-top:8px;" onclick="simulateWire()">
+              <button class="btn-sm btn-primary" style="width:100%;padding:14px;font-size:14px;margin-top:8px;" onclick="simulateWire('page')">
                 🌐 Send Wire Transfer
               </button>
               <div style="margin-top:12px;font-size:11px;color:var(--gray-500);text-align:center;">Wire cutoff: 4:00 PM EST · Processed within 1-3 business days</div>
@@ -1608,7 +1608,7 @@ canvas{max-width:100%;}
                 <div style="display:flex;justify-content:space-between;align-items:flex-end;position:relative;">
                   <div>
                     <div style="font-size:10px;color:rgba(255,255,255,0.5);letter-spacing:1px;text-transform:uppercase;">Card Holder</div>
-                    <div style="font-size:14px;font-weight:700;letter-spacing:1px;">SANDY HARRISON</div>
+                    <div style="font-size:14px;font-weight:700;letter-spacing:1px;">SANDRA B</div>
                   </div>
                   <div style="text-align:right;">
                     <div style="font-size:10px;color:rgba(255,255,255,0.5);letter-spacing:1px;text-transform:uppercase;">Expires</div>
@@ -1787,7 +1787,7 @@ canvas{max-width:100%;}
                 <div style="font-size:32px;">🏡</div>
                 <div>
                   <div style="font-size:16px;font-weight:700;">Primary Residence</div>
-                  <div style="font-size:12px;color:var(--gray-400);">Upper East Side, New York, NY 10028</div>
+                  <div style="font-size:12px;color:var(--gray-400);">Bel Air, Los Angeles, CA 90077</div>
                 </div>
               </div>
               <div style="display:flex;flex-direction:column;gap:10px;font-size:13px;">
@@ -2027,7 +2027,7 @@ canvas{max-width:100%;}
                 <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;">
                   <div style="width:72px;height:72px;background:linear-gradient(135deg,var(--gold),var(--blue-accent));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:white;border:3px solid rgba(201,168,76,0.5);">SH</div>
                   <div>
-                    <div style="font-size:20px;font-weight:800;">Sandy Harrison</div>
+                    <div style="font-size:20px;font-weight:800;">Sandra B</div>
                     <div style="color:var(--gold);font-size:12px;font-weight:600;letter-spacing:1px;">✦ PLATINUM ELITE MEMBER</div>
                     <div style="color:var(--gray-400);font-size:12px;margin-top:2px;">Customer since 2014 · OLVX-2026-001</div>
                   </div>
@@ -2043,7 +2043,7 @@ canvas{max-width:100%;}
                   </div>
                   <div style="display:flex;justify-content:space-between;padding:10px;background:rgba(255,255,255,0.03);border-radius:8px;">
                     <span style="color:var(--gray-400)">Address</span>
-                    <span style="font-weight:600;">740 Park Ave, New York, NY</span>
+                    <span style="font-weight:600;">1100 Bel Air Rd, Los Angeles, CA</span>
                   </div>
                   <div style="display:flex;justify-content:space-between;padding:10px;background:rgba(255,255,255,0.03);border-radius:8px;">
                     <span style="color:var(--gray-400)">Citizenship</span>
@@ -2165,11 +2165,11 @@ canvas{max-width:100%;}
       <button class="modal-close" onclick="closeModal('transferModal')">✕</button>
     </div>
     <div class="modal-field"><label>From</label>
-      <select><option>Premier Checking ****8847 — $12,654,567.88</option><option>Savings ****3291 — $4,250,000.00</option></select>
+      <select><option id="transferFromOpt">Premier Checking ****8847 — $12,654,567.88</option><option>Savings ****3291 — $4,250,000.00</option></select>
     </div>
-    <div class="modal-field"><label>To (Recipient)</label><input type="text" placeholder="Name or account number"></div>
+    <div class="modal-field"><label>To (Recipient)</label><input type="text" id="transferTo" placeholder="Name or account number"></div>
     <div class="modal-field"><label>Amount</label><input type="number" id="transferAmt" placeholder="$0.00"></div>
-    <div class="modal-field"><label>Note</label><input type="text" placeholder="What's this for?"></div>
+    <div class="modal-field"><label>Note</label><input type="text" id="transferNote" placeholder="What's this for?"></div>
     <div class="modal-actions">
       <button class="btn-sm btn-secondary" onclick="closeModal('transferModal')">Cancel</button>
       <button class="btn-sm btn-primary" onclick="simulateTransfer()">Send Money →</button>
@@ -2184,10 +2184,10 @@ canvas{max-width:100%;}
       <div class="modal-title">🌐 Wire Transfer</div>
       <button class="modal-close" onclick="closeModal('wireModal')">✕</button>
     </div>
-    <div class="modal-field"><label>Beneficiary Name</label><input type="text" placeholder="Full legal name"></div>
+    <div class="modal-field"><label>Beneficiary Name</label><input type="text" id="wireTo" placeholder="Full legal name"></div>
     <div class="modal-field"><label>Bank / SWIFT Code</label><input type="text" placeholder="SWIFT/BIC code"></div>
     <div class="modal-field"><label>Account / IBAN</label><input type="text" placeholder="Account or IBAN number"></div>
-    <div class="modal-field"><label>Amount (USD)</label><input type="number" placeholder="$0.00"></div>
+    <div class="modal-field"><label>Amount (USD)</label><input type="number" id="wireAmt" placeholder="$0.00"></div>
     <div class="modal-field"><label>Currency</label>
       <select><option>USD</option><option>EUR</option><option>GBP</option><option>JPY</option><option>CHF</option></select>
     </div>
@@ -2382,7 +2382,7 @@ canvas{max-width:100%;}
     <div class="modal-field"><label>Application Type</label>
       <select><option>Refinance Existing Mortgage</option><option>New Home Purchase</option><option>Home Equity Line of Credit (HELOC)</option></select>
     </div>
-    <div class="modal-field"><label>Property Address</label><input type="text" placeholder="Property address" value="740 Park Ave, New York, NY 10021"></div>
+    <div class="modal-field"><label>Property Address</label><input type="text" placeholder="Property address" value="1100 Bel Air Rd, Los Angeles, CA 90077"></div>
     <div class="modal-field"><label>Loan Amount</label><input type="number" placeholder="$0.00" value="3142800"></div>
     <div class="modal-field"><label>Desired Rate Type</label>
       <select><option>30-Year Fixed</option><option>15-Year Fixed</option><option>5/1 ARM</option><option>7/1 ARM</option></select>
@@ -2481,7 +2481,7 @@ canvas{max-width:100%;}
     </div>
     <div style="height:200px;overflow-y:auto;background:rgba(255,255,255,0.02);border-radius:10px;padding:14px;margin-bottom:12px;display:flex;flex-direction:column;gap:10px;" id="chatMessages">
       <div style="background:rgba(37,99,235,0.15);border-radius:10px 10px 10px 2px;padding:10px 14px;max-width:80%;font-size:13px;">
-        Good evening, Sandy! How may I assist you with your private banking needs today?
+        Good evening, Sandra! How may I assist you with your private banking needs today?
       </div>
     </div>
     <div style="display:flex;gap:8px;">
@@ -2525,7 +2525,7 @@ canvas{max-width:100%;}
       <select><option>9:00 AM</option><option>10:00 AM</option><option>11:00 AM</option><option>2:00 PM</option><option>3:00 PM</option><option>4:00 PM</option></select>
     </div>
     <div class="modal-field"><label>Location</label>
-      <select><option>Olvex Private Banking Center — 200 Park Ave, New York, NY</option><option>Video Conference (Secure Link)</option><option>Phone Call</option></select>
+      <select><option>Olvex Private Banking Center — 1900 Avenue of the Stars, Los Angeles, CA</option><option>Video Conference (Secure Link)</option><option>Phone Call</option></select>
     </div>
     <div class="modal-actions">
       <button class="btn-sm btn-secondary" onclick="closeModal('appointModal')">Cancel</button>
@@ -2541,10 +2541,10 @@ canvas{max-width:100%;}
       <div class="modal-title">✏ Edit Profile</div>
       <button class="modal-close" onclick="closeModal('editProfileModal')">✕</button>
     </div>
-    <div class="modal-field"><label>Full Name</label><input type="text" value="Sandy Harrison"></div>
+    <div class="modal-field"><label>Full Name</label><input type="text" value="Sandra B"></div>
     <div class="modal-field"><label>Email</label><input type="email" value="sandy@olvexbank.demo"></div>
     <div class="modal-field"><label>Phone</label><input type="tel" value="+1 (212) 555-8847"></div>
-    <div class="modal-field"><label>Address</label><textarea>740 Park Ave, New York, NY 10021</textarea></div>
+    <div class="modal-field"><label>Address</label><textarea>1100 Bel Air Rd, Los Angeles, CA 90077</textarea></div>
     <div class="modal-actions">
       <button class="btn-sm btn-secondary" onclick="closeModal('editProfileModal')">Cancel</button>
       <button class="btn-sm btn-primary" onclick="showToast('success','Profile updated successfully');closeModal('editProfileModal')">Save Changes →</button>
@@ -2660,7 +2660,7 @@ const NOTIFICATIONS = [
   {id:2,icon:'🔔',title:'Wire Transfer Confirmed',desc:'International wire of $25,000 to Zurich has been processed',time:'1 day ago',read:false,type:'info'},
   {id:3,icon:'⭐',title:'Reward Milestone',desc:'You reached 2,850,000 Olvex Elite Points! Redeem now.',time:'2 days ago',read:false,type:'gold'},
   {id:4,icon:'📈',title:'Portfolio Update',desc:'Your investment portfolio gained +$210,750 today',time:'3 days ago',read:true,type:'success'},
-  {id:5,icon:'🔐',title:'Security Alert',desc:'New device added: MacBook Pro — New York, NY',time:'5 days ago',read:true,type:'warning'},
+  {id:5,icon:'🔐',title:'Security Alert',desc:'New device added: MacBook Pro — Los Angeles, CA',time:'5 days ago',read:true,type:'warning'},
 ];
 
 const HOLDINGS = [
@@ -2682,18 +2682,27 @@ const MESSAGES = [
 ];
 
 const DEVICES = [
-  {name:'MacBook Pro 16"',location:'New York, NY',time:'Current session',icon:'💻',current:true},
-  {name:'iPhone 16 Pro',location:'New York, NY',time:'2 hours ago',icon:'📱',current:false},
-  {name:'iPad Pro 12.9"',location:'New York, NY',time:'Yesterday, 8:30 PM',icon:'📱',current:false},
+  {name:'MacBook Pro 16"',location:'Los Angeles, CA',time:'Current session',icon:'💻',current:true},
+  {name:'iPhone 16 Pro',location:'Los Angeles, CA',time:'2 hours ago',icon:'📱',current:false},
+  {name:'iPad Pro 12.9"',location:'Los Angeles, CA',time:'Yesterday, 8:30 PM',icon:'📱',current:false},
 ];
 
 const STATEMENTS = [
   {period:'May 2026',account:'Premier Checking ****8847',type:'Monthly Statement',status:'Ready'},
   {period:'May 2026',account:'High-Yield Savings ****3291',type:'Monthly Statement',status:'Ready'},
+  {period:'May 2026',account:'Investment Brokerage ****7102',type:'Monthly Statement',status:'Ready'},
   {period:'Apr 2026',account:'Premier Checking ****8847',type:'Monthly Statement',status:'Ready'},
-  {period:'Apr 2026',account:'Investment Brokerage ****7102',type:'Quarterly Statement',status:'Ready'},
-  {period:'Mar 2026',account:'Premier Checking ****8847',type:'Monthly Statement',status:'Ready'},
+  {period:'Apr 2026',account:'High-Yield Savings ****3291',type:'Monthly Statement',status:'Ready'},
+  {period:'Apr 2026',account:'Investment Brokerage ****7102',type:'Monthly Statement',status:'Ready'},
   {period:'Q1 2026',account:'All Accounts',type:'Quarterly Summary',status:'Ready'},
+  {period:'Mar 2026',account:'Premier Checking ****8847',type:'Monthly Statement',status:'Ready'},
+  {period:'Mar 2026',account:'High-Yield Savings ****3291',type:'Monthly Statement',status:'Ready'},
+  {period:'Mar 2026',account:'Investment Brokerage ****7102',type:'Quarterly Statement',status:'Ready'},
+  {period:'Feb 2026',account:'Premier Checking ****8847',type:'Monthly Statement',status:'Ready'},
+  {period:'Feb 2026',account:'High-Yield Savings ****3291',type:'Monthly Statement',status:'Ready'},
+  {period:'Jan 2026',account:'Premier Checking ****8847',type:'Monthly Statement',status:'Ready'},
+  {period:'Jan 2026',account:'High-Yield Savings ****3291',type:'Monthly Statement',status:'Ready'},
+  {period:'Jan 2026',account:'Investment Brokerage ****7102',type:'Monthly Statement',status:'Ready'},
 ];
 
 const UPCOMING_PAYMENTS = [
@@ -2757,6 +2766,15 @@ const RECENT_RECIPIENTS = [
 const VALID_USERS = ['Sandy001','sandy@olvexbank.demo'];
 const VALID_PASS = '$sandy$9898';
 
+// localStorage throws a SecurityError on file:// origins and in some private-mode
+// browsers. Opening this file directly (file://...) would otherwise crash the login
+// flow before the dashboard ever shows. These wrappers fail safe instead.
+const safeStore = {
+  get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
+  set(k,v){ try { localStorage.setItem(k,v); } catch(e){ /* no-op */ } },
+  remove(k){ try { localStorage.removeItem(k); } catch(e){ /* no-op */ } }
+};
+
 function handleLogin(){
   const user = document.getElementById('loginUser').value.trim();
   const pass = document.getElementById('loginPass').value;
@@ -2776,7 +2794,7 @@ function handleLogin(){
   btn.textContent='🔐 Authenticating...';
   btn.disabled=true;
 
-  if(remember)localStorage.setItem('olvex_session',JSON.stringify({user,ts:Date.now()}));
+  if(remember)safeStore.set('olvex_session',JSON.stringify({user,ts:Date.now()}));
 
   setTimeout(showLoadingScreen, 400);
 }
@@ -2814,7 +2832,7 @@ function togglePassword(){
 }
 
 function handleLogout(){
-  localStorage.removeItem('olvex_session');
+  safeStore.remove('olvex_session');
   showToast('info','You have been securely signed out.');
   setTimeout(()=>{
     document.getElementById('dashboard').style.display='none';
@@ -2826,56 +2844,65 @@ function handleLogout(){
   },800);
 }
 
-// Check existing session
-window.addEventListener('load',()=>{
-  const sess=localStorage.getItem('olvex_session');
+// Check existing session / reveal the app on first load
+function revealApp(){
+  const sess=safeStore.get('olvex_session');
   if(sess){
     try{
       const {ts}=JSON.parse(sess);
       if(Date.now()-ts < 86400000){showLoadingScreen();return;}
-      else localStorage.removeItem('olvex_session');
-    }catch(e){localStorage.removeItem('olvex_session');}
+      else safeStore.remove('olvex_session');
+    }catch(e){safeStore.remove('olvex_session');}
   }
+  // No valid session: dismiss the default splash and show the login page.
+  // (This was the deploy bug — on a fresh visit nothing hid #loadingScreen.)
+  setTimeout(()=>{
+    const ls=document.getElementById('loadingScreen');
+    if(!ls) return;
+    ls.style.opacity='0';
+    setTimeout(()=>{
+      ls.style.display='none';
+      const lp=document.getElementById('loginPage');
+      if(lp) lp.style.display='flex';
+    },500);
+  },900);
   // Allow Enter key
-  document.getElementById('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter')handleLogin();});
-  document.getElementById('loginUser').addEventListener('keydown',e=>{if(e.key==='Enter')handleLogin();});
+  const pass=document.getElementById('loginPass'), user=document.getElementById('loginUser');
+  if(pass) pass.addEventListener('keydown',e=>{if(e.key==='Enter')handleLogin();});
+  if(user) user.addEventListener('keydown',e=>{if(e.key==='Enter')handleLogin();});
   // Set today's date in date inputs
   document.querySelectorAll('input[type=date]').forEach(el=>{el.valueAsDate=new Date();});
-});
+}
+// Fire as soon as the DOM is ready — do NOT wait on external fonts/Chart.js (which can hang the splash).
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',revealApp);
+else revealApp();
 
 // ============================================
 // DASHBOARD INIT
 // ============================================
 function initDashboard(){
-  updateGreeting();
-  renderRecentTransactions();
-  renderFullTransactions();
-  renderUpcomingPayments();
-  renderSecurityAlerts();
-  renderLoginActivity();
-  renderNotifications();
-  renderHoldingsTable();
-  renderMessages();
-  renderDeviceList();
-  renderLoginHistory();
-  renderStatements();
-  renderBillPayees();
-  renderWireHistory();
-  renderRecentRecipients();
-  renderRedeemOptions();
-  renderPointsHistory();
-  renderTaxDocs();
-  renderFAQ();
-  initCharts();
-  startSessionTimer();
+  // Run each step in isolation: if one renderer throws (e.g. missing element / bad data),
+  // it must NOT abort every step after it and leave the dashboard blank.
+  const steps = [
+    updateGreeting, renderRecentTransactions, renderFullTransactions, renderUpcomingPayments,
+    renderSecurityAlerts, renderLoginActivity, renderNotifications, renderHoldingsTable,
+    renderMessages, renderDeviceList, renderLoginHistory, renderStatements, renderBillPayees,
+    renderWireHistory, renderRecentRecipients, renderRedeemOptions, renderPointsHistory,
+    renderTaxDocs, renderFAQ, initCharts, updateBalances,
+    resetSessionTimer // starts the 15-min idle auto-logout timer (was the original crash site)
+  ];
+  steps.forEach(fn=>{
+    try { fn(); }
+    catch(e){ console.error(`[initDashboard] ${fn.name} failed:`, e); }
+  });
   // Show session restored toast
-  setTimeout(()=>showToast('success','Welcome back, Sandy! Secure session established.'),800);
+  setTimeout(()=>showToast('success','Welcome back, Sandra! Secure session established.'),800);
 }
 
 function updateGreeting(){
   const h=new Date().getHours();
   const g=h<12?'Good Morning':h<17?'Good Afternoon':'Good Evening';
-  document.getElementById('topbarTitle').textContent=g+', Sandy 👋';
+  document.getElementById('topbarTitle').textContent=g+', Sandra 👋';
 }
 
 // ============================================
@@ -2953,9 +2980,9 @@ function renderSecurityAlerts(){
 function renderLoginActivity(){
   const el=document.getElementById('loginActivity');
   el.innerHTML=[
-    {loc:'New York, NY',device:'MacBook Pro 16"',time:'Today, 6:28 PM',status:'current'},
-    {loc:'New York, NY',device:'iPhone 16 Pro',time:'Today, 2:15 PM',status:'ok'},
-    {loc:'New York, NY',device:'iPad Pro',time:'Yesterday, 8:30 PM',status:'ok'},
+    {loc:'Los Angeles, CA',device:'MacBook Pro 16"',time:'Today, 6:28 PM',status:'current'},
+    {loc:'Los Angeles, CA',device:'iPhone 16 Pro',time:'Today, 2:15 PM',status:'ok'},
+    {loc:'Los Angeles, CA',device:'iPad Pro',time:'Yesterday, 8:30 PM',status:'ok'},
   ].map(l=>`
     <div class="tx-item" style="cursor:default;">
       <div class="tx-icon ${l.status==='current'?'deposit':'transfer'}">${l.status==='current'?'✅':'📍'}</div>
@@ -3031,10 +3058,10 @@ function renderLoginHistory(){
   const el=document.getElementById('loginHistoryFull');
   if(!el)return;
   el.innerHTML=[
-    {loc:'New York, NY',device:'MacBook Pro 16"',time:'Today, 6:28 PM',ip:'192.168.1.1',ok:true},
-    {loc:'New York, NY',device:'iPhone 16 Pro',time:'Today, 2:15 PM',ip:'192.168.1.2',ok:true},
-    {loc:'New York, NY',device:'iPad Pro',time:'Yesterday, 8:30 PM',ip:'192.168.1.3',ok:true},
-    {loc:'New York, NY',device:'MacBook Pro 16"',time:'Jun 4, 2026, 9:00 AM',ip:'192.168.1.1',ok:true},
+    {loc:'Los Angeles, CA',device:'MacBook Pro 16"',time:'Today, 6:28 PM',ip:'192.168.1.1',ok:true},
+    {loc:'Los Angeles, CA',device:'iPhone 16 Pro',time:'Today, 2:15 PM',ip:'192.168.1.2',ok:true},
+    {loc:'Los Angeles, CA',device:'iPad Pro',time:'Yesterday, 8:30 PM',ip:'192.168.1.3',ok:true},
+    {loc:'Los Angeles, CA',device:'MacBook Pro 16"',time:'Jun 4, 2026, 9:00 AM',ip:'192.168.1.1',ok:true},
   ].map(l=>`
     <div class="tx-item" style="cursor:default;">
       <div class="tx-icon ${l.ok?'deposit':'payment'}">${l.ok?'✅':'⚠'}</div>
@@ -3053,7 +3080,7 @@ function renderStatements(){
       <td style="font-weight:600;">${s.period}</td>
       <td>${s.account}</td>
       <td>${s.type}</td>
-      <td><span class="tx-status completed">${s.status}</span></td>
+      <td><span class="tx-status ${s.status==='Ready'?'completed':'pending'}">${s.status}</span></td>
       <td>
         <button class="btn-sm btn-secondary" style="padding:5px 10px;font-size:11px;margin-right:4px;" onclick="showToast('info','Viewing ${s.period} statement...')">View</button>
         <button class="btn-sm btn-primary" style="padding:5px 10px;font-size:11px;" onclick="showToast('success','Downloading ${s.period} PDF...')">⬇ PDF</button>
@@ -3292,15 +3319,81 @@ document.querySelectorAll('.modal-overlay').forEach(el=>{
 // ============================================
 // SIMULATIONS
 // ============================================
-function simulateTransfer(){
-  closeModal('transferModal');
-  showToast('info','Processing transfer...');
-  setTimeout(()=>showToast('success','✓ Transfer completed successfully!'),1500);
+// Single source of truth for the main (Premier Checking) balance.
+let checkingBalance = 12654567.88;
+const fmtUSD = n => '$' + Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+
+// Push the current balance to every place it's shown on screen.
+function updateBalances(){
+  const full  = fmtUSD(checkingBalance);
+  const whole = '$' + Math.floor(checkingBalance).toLocaleString('en-US');
+  const set=(id,val)=>{const e=document.getElementById(id); if(e) e.textContent=val;};
+  set('heroBalance', whole);                 // overview hero card
+  set('heroBalanceFull', full);              // overview "Available Balance"
+  set('checkingBalanceDisplay', full);       // accounts page
+  const opt=document.getElementById('transferFromOpt');
+  if(opt) opt.textContent = 'Premier Checking ****8847 — ' + full;
 }
-function simulateWire(){
-  closeModal('wireModal');
-  showToast('info','Wire transfer submitted for processing...');
-  setTimeout(()=>showToast('success','✓ Wire transfer initiated. Processing 1-3 business days.'),2000);
+
+// Prepend a completed transaction and refresh the lists.
+let _txSeq = 100;
+function addTransaction(desc, signedAmount, icon='transfer', type='Transfer'){
+  const now=new Date();
+  TRANSACTIONS.unshift({
+    id:'TXN'+(++_txSeq), type, icon, desc,
+    date: now.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),
+    time: now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}),
+    amount: signedAmount, status:'completed', account:'Checking ****8847'
+  });
+  renderRecentTransactions();
+  renderFullTransactions();
+}
+
+// Validate -> returns the numeric amount, or null (with an error toast) if invalid.
+function validateDebit(inputId, label){
+  const el=document.getElementById(inputId);
+  const amt=parseFloat(el && el.value);
+  if(!amt || amt<=0 || isNaN(amt)){ showToast('error','Please enter a valid '+label+' amount.'); return null; }
+  if(amt>checkingBalance){ showToast('error','Insufficient funds. Available: '+fmtUSD(checkingBalance)); return null; }
+  return amt;
+}
+
+// Shared execution path for both transfers and wires, from either the modal or the page form.
+function _runDebit(amt, recipient, modalId, clearIds, isWire){
+  if(modalId) closeModal(modalId);
+  showToast('info', isWire?'Wire transfer submitted for processing...':'Processing transfer...');
+  setTimeout(()=>{
+    checkingBalance -= amt;                              // deduct from the main money
+    updateBalances();
+    const desc = isWire ? ('International Wire'+(recipient?(' — '+recipient):''))
+                        : ('Transfer'+(recipient?(' to '+recipient):''));
+    addTransaction(desc, '-'+fmtUSD(amt));
+    showToast('success', isWire
+      ? '✓ Wire of '+fmtUSD(amt)+' initiated. Processing 1-3 business days.'
+      : '✓ '+fmtUSD(amt)+' sent successfully!');
+    (clearIds||[]).forEach(id=>{const e=document.getElementById(id); if(e&&'value'in e) e.value='';});
+  }, isWire?2000:1500);
+}
+
+// src === 'page' -> read the full-page form; otherwise read the popup modal.
+function simulateTransfer(src){
+  const isPage = src==='page';
+  const amt = validateDebit(isPage?'transferAmtPage':'transferAmt','transfer');
+  if(amt===null) return;
+  let recipient='';
+  if(!isPage){ const t=document.getElementById('transferTo'); recipient=t?(t.value||'').trim():''; }
+  _runDebit(amt, recipient, isPage?null:'transferModal',
+            isPage?['transferAmtPage']:['transferAmt','transferTo','transferNote'], false);
+}
+
+function simulateWire(src){
+  const isPage = src==='page';
+  const amt = validateDebit(isPage?'wireAmtPage':'wireAmt','wire');
+  if(amt===null) return;
+  const t=document.getElementById(isPage?'wireToPage':'wireTo');
+  const recipient = t?(t.value||'').trim():'';
+  _runDebit(amt, recipient, isPage?null:'wireModal',
+            isPage?['wireAmtPage','wireToPage']:['wireAmt','wireTo'], true);
 }
 function simulateBillPay(){
   closeModal('billModal');
